@@ -1,0 +1,1500 @@
+openapi: 3.1.0
+info:
+  title: Chinook Webapi
+  summary: Api for the Chinook database
+  description: Sale of tracks
+  termsOfService: https://api.hernandez-julio.com/webapi/termsofservice
+  version: v1
+  contact:
+    name: Administrator
+    email: admin@api.hernandez-julio.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0 
+servers:
+  - url: https://api.hernandez-julio.com
+    description: Production set
+security:
+  - bearerAuth: []     
+paths:
+  /webapi/v1/me:
+    description: Returns info about the current user.
+    get:
+      tags:
+        - Current user info  
+      description: Returns the current user description
+      operationId: getCurrentUser                
+      responses:
+        '200':
+          description: Ok. 
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - username
+                  - status
+                  - receive_offer 
+                  - public_key  
+                  - created_at
+                  - last_checked 
+                Properties:
+                  username:
+                    type: tale41
+                    example: Suspended
+                  status:
+                    type: string
+                    enum: [Active, Suspended]
+                  receive_offer:
+                    type: boolean
+                  public_key :
+                    type: string
+                    description: 32 character long string
+                    example: "fs6fd84g.."
+                  created_at:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  last_checked:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+        '401':
+          "$ref": "#/components/responses/_401" 
+        '503':
+          "$ref": "#/components/responses/_503"                    
+  /webapi/v1/albums:
+    description: Returns a paginated list of albums.
+    get:
+      tags:
+        - List of albums 
+      description: Returns the list of albums
+      operationId: getAllAlbums               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - AlbumId
+                  - Title
+                  - ArtistId
+                  Properties:
+                    AlbumId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Title:
+                      type: string
+                      example: "Apple"
+                    ArtistId:
+                      type: integer
+                      format: int64
+                      example: 101
+        '401':
+          "$ref": "#/components/responses/_401" 
+        '503':
+          "$ref": "#/components/responses/_503"         
+    post:
+      tags:
+        - Create new album 
+      description: Create a new album
+      operationId: addNewAlbum
+      requestBody:
+        description: album to add to the system
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              required:
+                  - Title
+                  - ArtistId
+              Properties:
+                  Title:
+                    type: string
+                    example: "Apple"
+                  ArtistId:
+                    type: integer
+                    format: int64
+                    example: 101
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: The unique location for the new album.
+              schema:
+                type: string
+                example: "https://hernandez-julio.com/albums/{AlbumId}"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - AlbumId
+                  - Title
+                  - ArtistId
+                Properties:
+                    AlbumId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Title:
+                      type: string
+                      example: "Apple"
+                    ArtistId:
+                      type: integer
+                      format: int64
+                      example: 101
+        '400':
+          "$ref": "#/components/responses/_400"           
+        '401':
+          "$ref": "#/components/responses/_401"
+        '503':
+          "$ref": "#/components/responses/_503"                               
+  /webapi/v1/albums/{AlbumId}:
+    description: Returns a album by Id.
+    get:
+      tags:
+        - Album
+      description: Returns one album by Id
+      operationId: getAlbumById             
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - AlbumId
+                - Title
+                - ArtistId
+                Properties:
+                  AlbumId:
+                    type: integer
+                    format: int64
+                    example: 101
+                  Title:
+                    type: string
+                    example: "Apple"
+                  ArtistId:
+                    type: integer
+                    format: int64
+                    example: 101
+        '401':
+          "$ref": "#/components/responses/_401"                    
+        '404':
+          "$ref": "#/components/responses/_404"                     
+        '503':
+          "$ref": "#/components/responses/_503"          
+    delete:
+      tags:
+        - Delete an album 
+      description: Delete an album
+      operationId: deleteAlbum
+      responses:
+        '200':
+          description: Ok. 
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - DeletedAlbumId
+                Properties:
+                  DeletedItemId:
+                    type: integer
+        '400':
+          "$ref": "#/components/responses/_400"                    
+        '401':
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"             
+        '503':
+          "$ref": "#/components/responses/_503"                                     
+    parameters:      
+    - name: AlbumId
+      in: path
+      description: the album's id
+      required: true
+      schema:
+        type: integer
+        minimum: 1              
+  /webapi/v1/albums/search:
+    description: Returns a paginated list of albums from a search result.
+    get:
+      tags:
+        - List of albums 
+      description: Returns the list of albums found
+      operationId: searchAlbum            
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - AlbumId
+                  - Title
+                  - ArtistId
+                  Properties:
+                    AlbumId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Title:
+                      type: string
+                      example: "Apple"
+                    ArtistId:
+                      type: integer
+                      format: int64
+                      example: 101
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '404':
+          "$ref": "#/components/responses/_404"            
+        '503':
+          "$ref": "#/components/responses/_503"                           
+    parameters:       
+    - name: searchTerm
+      in: query
+      description: search term string
+      required: true
+      schema:
+        type: string
+  /webapi/v1/employees:
+    description: Returns a paginated list of employees.
+    get:
+      tags:
+        - List of Employees 
+      description: Returns the list of employees
+      operationId: getAllEmpoyees               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - EmployeeId
+                    - LastName  
+                    - FirstName 
+                    - Title 
+                  Properties:
+                    EmployeeId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    LastName :
+                      type: string
+                      example: "Apple"
+                    FirstName:
+                      type: string
+                      example: "Apple"
+                    Title:
+                      type: string
+                      example: "Apple"
+        '401':
+          "$ref": "#/components/responses/_401" 
+        '503':
+          "$ref": "#/components/responses/_503"         
+    post:
+      tags:
+        - Create new employee 
+      description: Create a new employee
+      operationId: addNewEmployee
+      requestBody:
+        description: employee to add to the system
+        required: true
+        content:
+          'application/json':
+              schema:
+                type: object
+                required:
+                  - LastName  
+                  - FirstName 
+                  - Title     
+                  - ReportsTo 
+                  - BirthDate 
+                  - HireDate  
+                  - Address   
+                  - City      
+                  - State     
+                  - Country   
+                  - PostalCode
+                  - Phone     
+                  - Fax       
+                  - Email 
+                Properties:
+                  LastName :
+                    type: string
+                    example: "O'hara"
+                  FirstName:
+                    type: string
+                    example: "Oscar"
+                  Title:
+                    type: string
+                    example: "Supervisor"
+                  ReportsTo:
+                    type: integer
+                    sormat: int64
+                    example: 101
+                  BirthDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  HireDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  Address:
+                    type: string
+                    example: "Street 78th"
+                  City:
+                    type: string
+                    example: "Kigaly"
+                  State:
+                    type: string
+                    example: "Kigaly"
+                  Country:
+                    type: string
+                    example: "Ruanda"
+                  PostalCode:
+                    type: string
+                    example: "003000"
+                  Phone:
+                    type: string
+                    example: "01-123456789"
+                  Fax: 
+                    type: string
+                    example: "123456"
+                  Email:
+                    type: string
+                    example: "abc123@server1.com"
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: The unique location for the new employee.
+              schema:
+                type: string
+                example: "https://hernandez-julio.com/employee/{EmployeeId}"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - EmployeeId
+                  - LastName  
+                  - FirstName 
+                  - Title     
+                  - ReportsTo 
+                  - BirthDate 
+                  - HireDate  
+                  - Address   
+                  - City      
+                  - State     
+                  - Country   
+                  - PostalCode
+                  - Phone     
+                  - Fax       
+                  - Email 
+                Properties:
+                  EmployeeId:
+                    type: integer
+                    format: int64
+                    example: 101
+                  LastName :
+                    type: string
+                    example: "O'hara"
+                  FirstName:
+                    type: string
+                    example: "Oscar"
+                  Title:
+                    type: string
+                    example: "Supervisor"
+                  ReportsTo:
+                    type: integer
+                    sormat: int64
+                    example: 101
+                  BirthDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  HireDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  Address:
+                    type: string
+                    example: "Street 78th"
+                  City:
+                    type: string
+                    example: "Kigaly"
+                  State:
+                    type: string
+                    example: "Kigaly"
+                  Country:
+                    type: string
+                    example: "Ruanda"
+                  PostalCode:
+                    type: string
+                    example: "003000"
+                  Phone:
+                    type: string
+                    example: "01-123456789"
+                  Fax: 
+                    type: string
+                    example: "123456"
+                  Email:
+                    type: string
+                    example: "abc123@server1.com"
+        '400':
+          "$ref": "#/components/responses/_400"           
+        '401':
+          "$ref": "#/components/responses/_401"
+        '503':
+          "$ref": "#/components/responses/_503"                                     
+  /webapi/v1/employees/{EmployeeId}:
+    description: Returns a detailed employee data.
+    get:
+      tags:
+        - EmployeesById 
+      description: Returns an employee
+      operationId: getEmployeeById               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - EmployeeId
+                  - LastName  
+                  - FirstName 
+                  - Title     
+                  - ReportsTo 
+                  - BirthDate 
+                  - HireDate  
+                  - Address   
+                  - City      
+                  - State     
+                  - Country   
+                  - PostalCode
+                  - Phone     
+                  - Fax       
+                  - Email 
+                Properties:
+                  EmployeeId:
+                    type: integer
+                    sormat: int64
+                    example: 101
+                  LastName :
+                    type: string
+                    example: "O'hara"
+                  FirstName:
+                    type: string
+                    example: "Oscar"
+                  Title:
+                    type: string
+                    example: "Supervisor"
+                  ReportsTo:
+                    type: integer
+                    sormat: int64
+                    example: 101
+                  BirthDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  HireDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time 
+                  Address:
+                    type: string
+                    example: "Street 78th"
+                  City:
+                    type: string
+                    example: "Kigaly"
+                  State:
+                    type: string
+                    example: "Kigaly"
+                  Country:
+                    type: string
+                    example: "Ruanda"
+                  PostalCode:
+                    type: string
+                    example: "003000"
+                  Phone:
+                    type: string
+                    example: "01-123456789"
+                  Fax: 
+                    type: string
+                    example: "123456"
+                  Email:
+                    type: string
+                    example: "abc123@server1.com"
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '404':
+          "$ref": "#/components/responses/_404"           
+        '503':
+          "$ref": "#/components/responses/_503"               
+    delete:
+      tags:
+        - DeleteEmployeesById 
+      description: Delete an employee
+      operationId: deleteEmployee 
+      responses:
+        '200':
+          description: Ok. 
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - DeletedEmployeeId
+                Properties:
+                  DeletedItemId:
+                    type: integer
+        '401':
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"            
+        '503':
+          "$ref": "#/components/responses/_503"         
+    parameters:      
+      - name: EmployeeId
+        in: path
+        description: the employee's id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          description: positive value
+  /webapi/v1/invoices:
+    description: Returns a paginated list of invoices.
+    get:
+      tags:
+        - List of invoices
+      description: Returns the list of invoices
+      operationId: getAllInvoices              
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - InvoiceId        
+                    - CustomerId       
+                    - InvoiceDate      
+                    - Total 
+                  Properties:
+                    InvoiceId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    CustomerId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    InvoiceDate:
+                      type: string
+                      format: date-time
+                      example: "2019-10-12T07:20:50.52Z"
+                      description: ISO 8601 Combined Date and Time"                      
+                    Total:
+                      type: number
+                      format: double
+                      example: 3.26
+        '401':
+          "$ref": "#/components/responses/_401" 
+        '503':
+          "$ref": "#/components/responses/_503"                         
+  /webapi/v1/invoices/{InvoiceId}:
+    description: Returns a detailed invoice by its id.
+    get:
+      tags:
+        - Invoice by ID
+      description: Returns an invoice
+      operationId: getInvoiceById             
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                  type: object
+                  required:
+                    - InvoiceId        
+                    - CustomerId       
+                    - InvoiceDate      
+                    - BillingAddress   
+                    - BillingCity      
+                    - BillingState     
+                    - BillingCountry   
+                    - BillingPostalCode
+                    - Total 
+                  Properties:
+                    InvoiceId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    CustomerId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    InvoiceDate:
+                      type: string
+                      format: date-time
+                      example: "2019-10-12T07:20:50.52Z"
+                      description: ISO 8601 Combined Date and Time
+                    BillingAddress:
+                      type: string
+                      example: "Kigaly"
+                    BillingCity:
+                      type: string
+                      example: "Kigaly"
+                    BillingState :
+                      type: string
+                      example: "Kigaly"
+                    BillingCountry:
+                      type: string
+                      example: "Kigaly"
+                    BillingPostalCode:
+                    type: string
+                    example: "Kigaly"                    
+                    Total:
+                      type: number
+                      format: double
+                      example: 3.26
+        '401':
+          "$ref": "#/components/responses/_401"
+        '503':
+          "$ref": "#/components/responses/_503"                                            
+    parameters:      
+    - name: InvoiceId
+      in: path
+      description: Path id parameter
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        description: positive number
+  /webapi/v1/tracks:
+    description: Returns a paginated list of tracks (songs).
+    get:
+      tags:
+        - List of tracks 
+      description: Returns the list of tracks
+      operationId: getAllTracks               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - TrackId     
+                    - Name        
+                    - AlbumId     
+                    - MediaTypeId 
+                    - GenreId           
+                    - UnitPrice 
+                  Properties:
+                    TrackId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Name:
+                      type: string
+                      example: "Apple"
+                    AlbumId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    MediaTypeId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    GenreId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    UnitPrice:
+                      type: number
+                      format: double
+                      example: 3.26
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"         
+    post:
+      tags:
+        - Create new track 
+      description: Create a new track
+      operationId: addNewTrack
+      requestBody:
+        description: track to add to the system
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              required:    
+                - Name        
+                - AlbumId     
+                - MediaTypeId 
+                - GenreId
+                - Composer
+                - Milliseconds
+                - Bytes            
+                - UnitPrice 
+              Properties:
+                Name:
+                  type: string
+                  example: "Apple"
+                AlbumId:
+                  type: integer
+                  format: int64
+                  example: 101
+                MediaTypeId:
+                  type: integer
+                  format: int64
+                  example: 101
+                GenreId:
+                  type: integer
+                  format: int64
+                  example: 101
+                Composer:
+                  type: string
+                  example: "Mariano"
+                Milliseconds:
+                  type: integer
+                  format: int64
+                  example: 101
+                Bytes:
+                  type: integer
+                  format: int64
+                  example: 101                                    
+                UnitPrice:
+                  type: number
+                  format: double
+                  example: 3.26
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: The unique location for the new track.
+              schema:
+                type: string
+                example: "https://hernandez-julio.com/tracks/{AlbumId}"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - TrackId    
+                  - Name        
+                  - AlbumId     
+                  - MediaTypeId 
+                  - GenreId
+                  - Composer
+                  - Milliseconds
+                  - Bytes            
+                  - UnitPrice 
+                Properties:
+                  TrackId:
+                    type: integer
+                    format: int64
+                    example: 101                
+                  Name:
+                    type: string
+                    example: "Apple"
+                  AlbumId:
+                    type: integer
+                    format: int64
+                    example: 101
+                  MediaTypeId:
+                    type: integer
+                    format: int64
+                    example: 101
+                  GenreId:
+                    type: integer
+                    format: int64
+                    example: 101
+                  Composer:
+                    type: string
+                    example: "Mariano"
+                  Milliseconds:
+                    type: integer
+                    format: int64
+                    example: 101
+                  Bytes:
+                    type: integer
+                    format: int64
+                    example: 101                                    
+                  UnitPrice:
+                    type: number
+                    format: double
+                    example: 3.26
+        '400':
+          "$ref": "#/components/responses/_400"           
+        '401':
+          "$ref": "#/components/responses/_401"
+        '503':
+          "$ref": "#/components/responses/_503"          
+  /webapi/v1/tracks/{TrackId}:
+    description: Returns a track (songs) by its id.
+    get:
+      tags:
+        - A Track 
+      description: Returns a track
+      operationId: getTrackById               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                  type: object
+                  required:
+                    - TrackId     
+                    - Name        
+                    - AlbumId     
+                    - MediaTypeId 
+                    - GenreId           
+                    - UnitPrice 
+                  Properties:
+                    TrackId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Name:
+                      type: string
+                      example: "Apple"
+                    AlbumId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    MediaTypeId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    GenreId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    UnitPrice:
+                      type: number
+                      format: double
+                      example: 3.26
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"           
+    delete:
+      tags:
+        - DeleteTrackById 
+      description: Delete a track
+      operationId: deleteTrack
+      responses:
+        '200':
+          description: Ok. 
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - DeletedTrackId
+                Properties:
+                  DeletedTrackId:
+                    type: integer
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"                                     
+    parameters:      
+    - name: TrackId
+      in: path
+      description: Path id parameter
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        description: positive number
+  /webapi/v1/tracks/search:
+    description: Returns a paginated list of tracks from a search result.
+    get:
+      tags:
+        - List of tracks
+      description: Returns the list of tracks found
+      operationId: searchTrack   
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - TrackId     
+                    - Name        
+                    - AlbumId     
+                    - MediaTypeId 
+                    - GenreId           
+                    - UnitPrice 
+                  Properties:
+                    TrackId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Name:
+                      type: string
+                      example: "Apple"
+                    AlbumId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    MediaTypeId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    GenreId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    UnitPrice:
+                      type: number
+                      format: double
+                      example: 3.26
+        '401':
+          "$ref": "#/components/responses/_401" 
+        '404':
+          "$ref": "#/components/responses/_404"           
+        '503':
+          "$ref": "#/components/responses/_503"                           
+    parameters:       
+    - name: searchTerm
+      in: query
+      description: search term string
+      required: true
+      schema:
+        type: string
+  /webapi/v1/customers:
+    description: Returns a paginated list of customers.
+    get:
+      tags:
+        - List of albums 
+      description: Returns the list of customers
+      operationId: getAllCustomers               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - CustomerId  
+                    - FirstName   
+                    - LastName                  
+                    - SupportRepId
+                  Properties:
+                    CustomerId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    FirstName:
+                      type: string
+                      example: "Apple"
+                    LastName:
+                      type: integer
+                      format: int64
+                      example: 101
+                    SupportRepId:
+                      type: integer
+                      format: int64
+                      example: 101
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"         
+    post:
+      tags:
+        - Create new customer 
+      description: Create a new customer 
+      operationId: addNewCustomer 
+      requestBody:
+        description: customer  to add to the system
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              required:    
+                - FirstName   
+                - LastName    
+                - Company     
+                - Address     
+                - City        
+                - State       
+                - Country     
+                - PostalCode  
+                - Phone       
+                - Fax         
+                - Email       
+                - SupportRepId 
+              Properties:
+              FirstName:
+                  type: string
+                  example: "Apple"
+              LastName:
+                  type: integer
+                  format: int64
+                  example: 101
+              Company:
+                  type: string
+                  example: apple
+              Address:
+                  type: string
+                  example: apple
+              City:
+                  type: string
+                  example: apple
+              State:
+                  type: string
+                  example: apple
+              Country:
+                  type: string
+                  example: apple
+              PostalCode: 
+                  type: string
+                  example: apple
+              Phone: 
+                  type: string
+                  example: apple
+              Fax: 
+                  type: string
+                  example: apple  
+              Email: 
+                  type: string
+                  example: apple                                  
+              SupportRepId:
+                  type: integer
+                  format: int64
+                  example: 101                  
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: The unique location for the new track.
+              schema:
+                type: string
+                example: "https://hernandez-julio.com/tracks/{AlbumId}"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:    
+                  - FirstName   
+                  - LastName    
+                  - Company     
+                  - Address     
+                  - City        
+                  - State       
+                  - Country     
+                  - PostalCode  
+                  - Phone       
+                  - Fax         
+                  - Email       
+                  - SupportRepId 
+                Properties:
+                FirstName:
+                    type: string
+                    example: "Apple"
+                LastName:
+                    type: integer
+                    format: int64
+                    example: 101
+                Company:
+                    type: string
+                    example: apple
+                Address:
+                    type: string
+                    example: apple
+                City:
+                    type: string
+                    example: apple
+                State:
+                    type: string
+                    example: apple
+                Country:
+                    type: string
+                    example: apple
+                PostalCode: 
+                    type: string
+                    example: apple
+                Phone: 
+                    type: string
+                    example: apple
+                Fax: 
+                    type: string
+                    example: apple  
+                Email: 
+                    type: string
+                    example: apple                                  
+                SupportRepId:
+                    type: integer
+                    format: int64
+                    example: 101
+        '400':
+          "$ref": "#/components/responses/_400"           
+        '401':
+          "$ref": "#/components/responses/_401"
+        '503':
+          "$ref": "#/components/responses/_503"                                    
+  /webapi/v1/customers/{CustomerId}:
+    description: Returns a customer detail info.
+    get:
+      tags:
+        - A customer 
+      description: Returns a customer
+      operationId: getCustomerById               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                  type: object
+                  required:
+                    - CustomerId  
+                    - FirstName   
+                    - LastName                  
+                    - SupportRepId
+                    - Company     
+                    - Address     
+                    - City        
+                    - State       
+                    - Country     
+                    - PostalCode  
+                    - Phone       
+                    - Fax         
+                    - Email 
+                  Properties:
+                    CustomerId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    FirstName:
+                      type: string
+                      example: "Apple"
+                    LastName:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Company:
+                      type: string
+                      example: "Apple"                         
+                    Address:     
+                      type: string
+                      example: "Apple"                    
+                    City:
+                      type: string
+                      example: "Apple"                            
+                    State:
+                      type: string
+                      example: "Apple"                           
+                    Country:
+                      type: string
+                      example: "Apple"                         
+                    PostalCode:
+                      type: string
+                      example: "Apple"                      
+                    Phone:
+                      type: string
+                      example: "Apple"                           
+                    Fax:
+                      type: string
+                      example: "Apple"                             
+                    Email:
+                      type: string
+                      example: "Apple"                     
+                    SupportRepId:
+                      type: integer
+                      format: int64
+                      example: 101
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"         
+    delete:
+      tags:
+        - DeleteCustomerById 
+      description: Delete a Customer
+      operationId: deleteCustomer
+      responses:
+        '200':
+          description: Ok. 
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - DeletedCustomerId
+                Properties:
+                  DeletedTrackId:
+                    type: integer
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"                                   
+    parameters:      
+    - name: CustomerId
+      in: path
+      description: Path id parameter
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        description: positive number
+  /webapi/v1/sales:
+    description: Returns a paginated list of the total sales.
+    get:
+      tags:
+        - List of sales 
+      description: Returns the list of sales
+      operationId: getAllSales               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - TrackId
+                    - Name
+                    - UnitPrice
+                    - Quantity
+                    - Total
+                  Properties:
+                    TrackId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    Name:
+                      type: string
+                      example: "John"
+                    UnitPrice:
+                      type: number
+                      format: double
+                      example: 2.36
+                    Quantity:
+                      type: integer
+                      example: 3
+                    Total:
+                      type: number
+                      format: double
+                      example: 2.36                      
+        '401':
+          "$ref": "#/components/responses/_401"
+        '503':
+          "$ref": "#/components/responses/_503"                                         
+  /webapi/v1/sales/byRep:
+    description: Returns a paginated list of sales by representative.
+    get:
+      tags:
+        - List of sales by representative
+      description: Returns the list of sales  by representative
+      operationId: getAllSalesByRepresentative               
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - EmployeeId
+                    - FirstName
+                    - LastName
+                    - TotalSales
+                  Properties:
+                    EmployeeId:
+                      type: integer
+                      format: int64
+                      example: 101
+                    FirstName:
+                      type: string
+                      example: "John"
+                    LastName:
+                      type: string
+                      example: "Ortega"
+                    TotalSales:
+                      type: number
+                      format: double
+                      example: 27.59                      
+        '401':
+          "$ref": "#/components/responses/_401"  
+        '503':
+          "$ref": "#/components/responses/_503"        
+  /webapi/v1/sales/byquarter:
+    description: Returns a paginated list of sales grouped by quarter.
+    get:
+      tags:
+        - List of sales group by quarter.
+      description: Returns the list of sales grouped by quarter.
+      operationId: getAllSalesGroupedByQuarter
+      responses:
+        '200':
+          description: Ok succesful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - Year
+                    - Quarter
+                    - TotalAmount
+                  Properties:
+                    Year:
+                      type: string
+                      example: "2013"
+                    Quarter:
+                      type: string
+                      example: "First"
+                    TotalAmount:
+                      type: number
+                      format: double
+                      example: 2700.59                      
+        '401':
+          "$ref": "#/components/responses/_401" 
+        '503':
+          "$ref": "#/components/responses/_503"                         
+components:
+  responses: 
+    _400:              
+      description: Bad request. 
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - probable_culprit
+            Properties:
+              probable_culprit:
+                type: array
+                items:
+                  - Malformed Syntax
+                  - Missing Required Data
+                  - Invalid Data Types or Values
+                  - Encoding Issues    
+    _401:
+      description: Unauthorized 
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+              - message
+            Properties:
+              error:
+                type: string
+                example: "Unauthorized"
+              message:
+                type: string
+                example: "Missing or invalid token."
+      headers:      
+        WWW-Authenticate:
+          description: Required authentication
+          schema:
+          example: "WWW-Authenticate: Bearer realm='Access to admin site', error='invalid_token'"
+    _404:              
+      description: Not found 
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+              - message
+            Properties:
+              error:
+                type: string
+                example: "Not found"
+              message:
+                type: string
+                example: "The requested resource, {user} with ID {123}, could not be found on this server."
+    _503:
+      description: Server maintenance. 
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+              - message
+              - timestamp
+            Properties:
+              error:
+                type: string
+                example: "Service Unavailable."
+              message:
+                type: string
+                example: "We're currently upgrading our systems. Please check back at {Time}."
+              timestamp:
+                type: string
+                format: date-time
+                example: "2019-10-12T07:20:50.52Z"
+                description: ISO 8601 Combined Date and Time                              
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token
+      bearerFormat: 32 character self produced (webapi) string
+
