@@ -33,18 +33,23 @@ paths:
                 type: object
                 required:
                   - username
+                  - email
                   - status
-                  - receive_offer 
+                  - receive_offer
                   - public_key  
                   - created_at
+                  - expìres_at
                   - last_checked 
                 Properties:
                   username:
-                    type: tale41
-                    example: Suspended
-                  status:
                     type: string
-                    enum: [Active, Suspended]
+                    example: Mary 
+                  email:
+                    type: string
+                    example: something@fake.com
+                  status:
+                    type: enum
+                    enum: [Active, Suspended, Deleted]
                   receive_offer:
                     type: boolean
                   public_key :
@@ -56,6 +61,11 @@ paths:
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
                     description: ISO 8601 Combined Date and Time 
+                  expires_at:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time
                   last_checked:
                     type: string
                     format: date-time
@@ -260,6 +270,8 @@ paths:
                       type: integer
                       format: int64
                       example: 101
+        '400':
+          "$ref": "#/components/responses/_400" 
         '401':
           "$ref": "#/components/responses/_401"  
         '404':
@@ -273,6 +285,12 @@ paths:
       required: true
       schema:
         type: string
+    - name: page
+      in: query
+      description: Page number for pagination, base64url encoded
+      required: false
+      schema:
+        type: string    
   /webapi/v1/employees:
     description: Returns a paginated list of employees.
     get:
@@ -1000,6 +1018,8 @@ paths:
                       type: number
                       format: double
                       example: 3.26
+        '400':
+          "$ref": "#/components/responses/_400" 
         '401':
           "$ref": "#/components/responses/_401" 
         '404':
@@ -1013,6 +1033,12 @@ paths:
       required: true
       schema:
         type: string
+    - name: page
+      in: query
+      description: Page number for pagination, base64url encoded
+      required: false
+      schema:
+        type: string   
   /webapi/v1/customers:
     description: Returns a paginated list of customers.
     get:
@@ -1431,7 +1457,8 @@ components:
                   - Malformed Syntax
                   - Missing Required Data
                   - Invalid Data Types or Values
-                  - Encoding Issues    
+                  - Encoding Issues
+                  - Invalid Page     
     _401:
       description: Unauthorized 
       content:
@@ -1452,7 +1479,7 @@ components:
         WWW-Authenticate:
           description: Required authentication
           schema:
-          example: "WWW-Authenticate: Bearer realm='Access to admin site', error='invalid_token'"
+          example: "WWW-Authenticate: Bearer realm='Access to admin site', error='Required authentication'"
     _404:              
       description: Not found 
       content:
