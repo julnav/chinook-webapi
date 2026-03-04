@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Chinook Webapi
-  summary: Api for the Chinook database
+  summary: RESTful API for the Chinook database
   description: Sale of tracks
   termsOfService: https://api.hernandez-julio.com/webapi/termsofservice
   version: v1
