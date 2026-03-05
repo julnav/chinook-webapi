@@ -88,25 +88,40 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                  - AlbumId
-                  - Title
-                  - ArtistId
-                  Properties:
-                    AlbumId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    Title:
-                      type: string
-                      example: "Apple"
-                    ArtistId:
-                      type: integer
-                      format: int64
-                      example: 101
+                type: object
+                Properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request 
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - AlbumId
+                      - Title
+                      - ArtistId
+                      Properties:
+                        AlbumId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        Title:
+                          type: string
+                          example: "Apple"
+                        ArtistId:
+                          type: integer
+                          format: int64
+                          example: 101
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -251,25 +266,40 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                  - AlbumId
-                  - Title
-                  - ArtistId
-                  Properties:
-                    AlbumId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    Title:
-                      type: string
-                      example: "Apple"
-                    ArtistId:
-                      type: integer
-                      format: int64
-                      example: 101
+                type: object
+                Properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request 
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - AlbumId
+                      - Title
+                      - ArtistId
+                      Properties:
+                        AlbumId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        Title:
+                          type: string
+                          example: "Apple"
+                        ArtistId:
+                          type: integer
+                          format: int64
+                          example: 101
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
@@ -304,28 +334,43 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - EmployeeId
-                    - LastName  
-                    - FirstName 
-                    - Title 
-                  Properties:
-                    EmployeeId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    LastName :
-                      type: string
-                      example: "Apple"
-                    FirstName:
-                      type: string
-                      example: "Apple"
-                    Title:
-                      type: string
-                      example: "Apple"
+                type: object
+                properties: 
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request   
+                  data:                 
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - EmployeeId
+                        - LastName  
+                        - FirstName 
+                        - Title 
+                      Properties:
+                        EmployeeId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        LastName :
+                          type: string
+                          example: "Apple"
+                        FirstName:
+                          type: string
+                          example: "Apple"
+                        Title:
+                          type: string
+                          example: "Apple"
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -625,32 +670,47 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - InvoiceId        
-                    - CustomerId       
-                    - InvoiceDate      
-                    - Total 
-                  Properties:
-                    InvoiceId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    CustomerId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    InvoiceDate:
-                      type: string
-                      format: date-time
-                      example: "2019-10-12T07:20:50.52Z"
-                      description: ISO 8601 Combined Date and Time"                      
-                    Total:
-                      type: number
-                      format: double
-                      example: 3.26
+                type: object
+                properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request 
+                  data:       
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - InvoiceId        
+                        - CustomerId       
+                        - InvoiceDate      
+                        - Total 
+                      Properties:
+                        InvoiceId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        CustomerId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        InvoiceDate:
+                          type: string
+                          format: date-time
+                          example: "2019-10-12T07:20:50.52Z"
+                          description: ISO 8601 Combined Date and Time"                      
+                        Total:
+                          type: number
+                          format: double
+                          example: 3.26
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -738,40 +798,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - TrackId     
-                    - Name        
-                    - AlbumId     
-                    - MediaTypeId 
-                    - GenreId           
-                    - UnitPrice 
-                  Properties:
-                    TrackId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    Name:
-                      type: string
-                      example: "Apple"
-                    AlbumId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    MediaTypeId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    GenreId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    UnitPrice:
-                      type: number
-                      format: double
-                      example: 3.26
+                type: object
+                properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request 
+                  data:                       
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - TrackId     
+                        - Name        
+                        - AlbumId     
+                        - MediaTypeId 
+                        - GenreId           
+                        - UnitPrice 
+                      Properties:
+                        TrackId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        Name:
+                          type: string
+                          example: "Apple"
+                        AlbumId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        MediaTypeId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        GenreId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        UnitPrice:
+                          type: number
+                          format: double
+                          example: 3.26
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -984,40 +1059,55 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - TrackId     
-                    - Name        
-                    - AlbumId     
-                    - MediaTypeId 
-                    - GenreId           
-                    - UnitPrice 
-                  Properties:
-                    TrackId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    Name:
-                      type: string
-                      example: "Apple"
-                    AlbumId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    MediaTypeId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    GenreId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    UnitPrice:
-                      type: number
-                      format: double
-                      example: 3.26
+                type: object
+                properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request  
+                  data:                      
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - TrackId     
+                        - Name        
+                        - AlbumId     
+                        - MediaTypeId 
+                        - GenreId           
+                        - UnitPrice 
+                      Properties:
+                        TrackId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        Name:
+                          type: string
+                          example: "Apple"
+                        AlbumId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        MediaTypeId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        GenreId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        UnitPrice:
+                          type: number
+                          format: double
+                          example: 3.26
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
@@ -1052,30 +1142,45 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - CustomerId  
-                    - FirstName   
-                    - LastName                  
-                    - SupportRepId
-                  Properties:
-                    CustomerId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    FirstName:
-                      type: string
-                      example: "Apple"
-                    LastName:
-                      type: integer
-                      format: int64
-                      example: 101
-                    SupportRepId:
-                      type: integer
-                      format: int64
-                      example: 101
+                type: object
+                properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request 
+                  data:                         
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - CustomerId  
+                        - FirstName   
+                        - LastName                  
+                        - SupportRepId
+                      Properties:
+                        CustomerId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        FirstName:
+                          type: string
+                          example: "Apple"
+                        LastName:
+                          type: integer
+                          format: int64
+                          example: 101
+                        SupportRepId:
+                          type: integer
+                          format: int64
+                          example: 101
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -1333,34 +1438,49 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - TrackId
-                    - Name
-                    - UnitPrice
-                    - Quantity
-                    - Total
-                  Properties:
-                    TrackId:
-                      type: integer
-                      format: int64
-                      example: 101
-                    Name:
-                      type: string
-                      example: "John"
-                    UnitPrice:
-                      type: number
-                      format: double
-                      example: 2.36
-                    Quantity:
-                      type: integer
-                      example: 3
-                    Total:
-                      type: number
-                      format: double
-                      example: 2.36                      
+                type: object
+                properties:
+                  lnks:
+                    type: array
+                    required:
+                      prev
+                      next
+                    Properties:
+                      prev:
+                        type: string
+                        description: Represents the URL for the previous page of this request  
+                      next:
+                        type: string
+                        description: Represents the URL for the next page of this request 
+                  data:                        
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - TrackId
+                        - Name
+                        - UnitPrice
+                        - Quantity
+                        - Total
+                      Properties:
+                        TrackId:
+                          type: integer
+                          format: int64
+                          example: 101
+                        Name:
+                          type: string
+                          example: "John"
+                        UnitPrice:
+                          type: number
+                          format: double
+                          example: 2.36
+                        Quantity:
+                          type: integer
+                          example: 3
+                        Total:
+                          type: number
+                          format: double
+                          example: 2.36                      
         '401':
           "$ref": "#/components/responses/_401"
         '503':
