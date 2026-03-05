@@ -97,9 +97,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
                         type: string
+                        description: Represents the URL for the next page of this request 
                   data:
                     type: array
                     items:
@@ -273,9 +275,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
                         type: string
+                        description: Represents the URL for the next page of this request 
                   data:
                     type: array
                     items:
@@ -339,9 +343,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
-                        type: string   
+                        type: string
+                        description: Represents the URL for the next page of this request   
                   data:                 
                     type: array
                     items:
@@ -673,9 +679,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the next page of this request 
                   data:       
                     type: array
                     items:
@@ -799,9 +807,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the next page of this request 
                   data:                       
                     type: array
                     items:
@@ -1058,9 +1068,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the next page of this request  
                   data:                      
                     type: array
                     items:
@@ -1139,9 +1151,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the next page of this request 
                   data:                         
                     type: array
                     items:
@@ -1433,9 +1447,11 @@ paths:
                       next
                     Properties:
                       prev:
-                        type: string  
+                        type: string
+                        description: Represents the URL for the previews page of this request  
                       next:
                         type: string
+                        description: Represents the URL for the next page of this request 
                   data:                        
                     type: array
                     items:
