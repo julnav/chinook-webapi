@@ -98,7 +98,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request 
@@ -276,7 +276,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request 
@@ -344,7 +344,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request   
@@ -680,7 +680,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request 
@@ -808,7 +808,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request 
@@ -1069,7 +1069,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request  
@@ -1152,7 +1152,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request 
@@ -1448,7 +1448,7 @@ paths:
                     Properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previews page of this request  
+                        description: Represents the URL for the previous page of this request  
                       next:
                         type: string
                         description: Represents the URL for the next page of this request 
