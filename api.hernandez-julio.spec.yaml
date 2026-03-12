@@ -472,18 +472,6 @@ paths:
                 required:
                   - LastName  
                   - FirstName 
-                  - Title     
-                  - ReportsTo 
-                  - BirthDate 
-                  - HireDate  
-                  - Address   
-                  - City      
-                  - State     
-                  - Country   
-                  - PostalCode
-                  - Phone     
-                  - Fax       
-                  - Email 
                 Properties:
                   LastName :
                     type: string
@@ -1275,13 +1263,9 @@ paths:
             schema:
               type: object
               required:    
-                - Name        
-                - AlbumId     
+                - Name          
                 - MediaTypeId 
-                - GenreId
-                - Composer
-                - Milliseconds
-                - Bytes            
+                - Milliseconds            
                 - UnitPrice 
               Properties:
                 Name:
@@ -1731,17 +1715,8 @@ paths:
               type: object
               required:    
                 - FirstName   
-                - LastName    
-                - Company     
-                - Address     
-                - City        
-                - State       
-                - Country     
-                - PostalCode  
-                - Phone       
-                - Fax         
+                - LastName           
                 - Email       
-                - SupportRepId 
               Properties:
               FirstName:
                   type: string
@@ -1805,7 +1780,8 @@ paths:
             application/json:
               schema:
                 type: object
-                required:    
+                required:
+                  - CustomerId     
                   - FirstName   
                   - LastName    
                   - Company     
