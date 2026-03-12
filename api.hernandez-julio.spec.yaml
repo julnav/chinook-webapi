@@ -164,7 +164,7 @@ paths:
               description: The unique location for the new album.
               schema:
                 type: string
-                example: "https://hernandez-julio.com/albums/{AlbumId}"
+                example: "https://api.hernandez-julio.com/webapi/v1/albums/{AlbumId}"
           content:
             application/json:
               schema:
@@ -525,7 +525,7 @@ paths:
               description: The unique location for the new employee.
               schema:
                 type: string
-                example: "https://hernandez-julio.com/employee/{EmployeeId}"
+                example: "https://api.hernandez-julio.com/webapi/v1/employee/{EmployeeId}"
           content:
             application/json:
               schema:
@@ -1275,7 +1275,7 @@ paths:
               description: The unique location for the new track.
               schema:
                 type: string
-                example: "https://hernandez-julio.com/tracks/{AlbumId}"
+                example: "https://api.hernandez-julio.com/webapi/v1/tracks/{AlbumId}"
           content:
             application/json:
               schema:
@@ -1711,7 +1711,7 @@ paths:
               description: The unique location for the new track.
               schema:
                 type: string
-                example: "https://hernandez-julio.com/tracks/{AlbumId}"
+                example: "https://api.hernandez-julio.com/webapi/v1/tracks/{AlbumId}"
           content:
             application/json:
               schema:
