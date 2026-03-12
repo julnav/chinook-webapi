@@ -43,15 +43,20 @@ paths:
                 Properties:
                   username:
                     type: string
+                    minLength: 2
+                    maxLength: 16
                     example: Mary 
                   email:
                     type: string
+                    maxLength: 60
                     example: something@fake.com
                   status:
                     type: enum
                     enum: [Active, Suspended, Deleted]
                   receive_offer:
-                    type: boolean
+                    type: integer
+                    minimum: 0
+                    maximum: 1
                   public_key :
                     type: string
                     description: 32 character long string
@@ -60,7 +65,7 @@ paths:
                     type: string
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
-                    description: ISO 8601 Combined Date and Time 
+                    description: ISO 8601 Combined Date and Time
                   expires_at:
                     type: string
                     format: date-time
@@ -70,7 +75,7 @@ paths:
                     type: string
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
-                    description: ISO 8601 Combined Date and Time 
+                    description: ISO 8601 Combined Date and Time
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -114,13 +119,16 @@ paths:
                         AlbumId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         Title:
                           type: string
+                          maxLength: 160
                           example: "Apple"
                         ArtistId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
         '401':
           "$ref": "#/components/responses/_401" 
@@ -144,10 +152,12 @@ paths:
               Properties:
                   Title:
                     type: string
+                    maxLength: 160
                     example: "Apple"
                   ArtistId:
                     type: integer
                     format: int64
+                    minimum: 1
                     example: 101
       responses:
         '201':
@@ -170,13 +180,16 @@ paths:
                     AlbumId:
                       type: integer
                       format: int64
+                      minimum: 1
                       example: 101
                     Title:
                       type: string
+                      maxLength: 160
                       example: "Apple"
                     ArtistId:
                       type: integer
                       format: int64
+                      minimum: 1
                       example: 101
         '400':
           "$ref": "#/components/responses/_400"           
@@ -206,13 +219,16 @@ paths:
                   AlbumId:
                     type: integer
                     format: int64
+                    minimum: 1
                     example: 101
                   Title:
                     type: string
+                    maxLength: 160
                     example: "Apple"
                   ArtistId:
                     type: integer
                     format: int64
+                    minimum: 1
                     example: 101
         '401':
           "$ref": "#/components/responses/_401"                    
@@ -237,6 +253,7 @@ paths:
                 Properties:
                   DeletedItemId:
                     type: integer
+                    minimum: 1
         '400':
           "$ref": "#/components/responses/_400"                    
         '401':
@@ -292,13 +309,16 @@ paths:
                         AlbumId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         Title:
                           type: string
+                          maxLength: 160
                           example: "Apple"
                         ArtistId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
         '400':
           "$ref": "#/components/responses/_400" 
@@ -315,6 +335,8 @@ paths:
       required: true
       schema:
         type: string
+        minLength: 4
+        maxLength: 16
     - name: page
       in: query
       description: Page number for pagination, base64url encoded
@@ -360,16 +382,20 @@ paths:
                       Properties:
                         EmployeeId:
                           type: integer
+                          minimum: 1
                           format: int64
                           example: 101
                         LastName :
                           type: string
+                          maxLength: 20
                           example: "Apple"
                         FirstName:
                           type: string
+                          maxLength: 20
                           example: "Apple"
                         Title:
                           type: string
+                          maxLength: 30
                           example: "Apple"
         '401':
           "$ref": "#/components/responses/_401" 
@@ -405,50 +431,62 @@ paths:
                 Properties:
                   LastName :
                     type: string
+                    maxLength: 20
                     example: "O'hara"
                   FirstName:
                     type: string
+                    maxLength: 20
                     example: "Oscar"
                   Title:
                     type: string
+                    maxLength: 30
                     example: "Supervisor"
                   ReportsTo:
                     type: integer
                     sormat: int64
+                    minimum: 1
                     example: 101
                   BirthDate:
                     type: string
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
-                    description: ISO 8601 Combined Date and Time 
+                    description: ISO 8601 Combined Date and Time
                   HireDate:
                     type: string
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
-                    description: ISO 8601 Combined Date and Time 
+                    description: ISO 8601 Combined Date and Time
                   Address:
                     type: string
+                    maxLength: 70
                     example: "Street 78th"
                   City:
                     type: string
+                    maxLength: 40
                     example: "Kigaly"
                   State:
                     type: string
+                    maxLength: 40
                     example: "Kigaly"
                   Country:
                     type: string
+                    maxLength: 40
                     example: "Ruanda"
                   PostalCode:
                     type: string
+                    maxLength: 10
                     example: "003000"
                   Phone:
                     type: string
+                    maxLength: 24
                     example: "01-123456789"
                   Fax: 
                     type: string
+                    maxLength: 24
                     example: "123456"
                   Email:
                     type: string
+                    maxLength: 60
                     example: "abc123@server1.com"
       responses:
         '201':
@@ -486,16 +524,20 @@ paths:
                     example: 101
                   LastName :
                     type: string
+                    maxLength: 20
                     example: "O'hara"
                   FirstName:
                     type: string
+                    maxLength: 20
                     example: "Oscar"
                   Title:
                     type: string
+                    maxLength: 30
                     example: "Supervisor"
                   ReportsTo:
                     type: integer
                     sormat: int64
+                    minimum: 1
                     example: 101
                   BirthDate:
                     type: string
@@ -509,27 +551,35 @@ paths:
                     description: ISO 8601 Combined Date and Time 
                   Address:
                     type: string
+                    maxLength: 70
                     example: "Street 78th"
                   City:
                     type: string
+                    maxLength: 40
                     example: "Kigaly"
                   State:
                     type: string
+                    maxLength: 40
                     example: "Kigaly"
                   Country:
                     type: string
+                    maxLength: 40
                     example: "Ruanda"
                   PostalCode:
                     type: string
+                    maxLength: 10
                     example: "003000"
                   Phone:
                     type: string
+                    maxLength: 24
                     example: "01-123456789"
                   Fax: 
                     type: string
+                    maxLength: 24
                     example: "123456"
                   Email:
                     type: string
+                    maxLength: 60
                     example: "abc123@server1.com"
         '400':
           "$ref": "#/components/responses/_400"           
@@ -574,50 +624,62 @@ paths:
                     example: 101
                   LastName :
                     type: string
+                    maxLength: 20
                     example: "O'hara"
                   FirstName:
                     type: string
+                    maxLength: 20
                     example: "Oscar"
                   Title:
                     type: string
+                    maxLength: 30
                     example: "Supervisor"
                   ReportsTo:
                     type: integer
                     sormat: int64
+                    minimum: 1
                     example: 101
                   BirthDate:
                     type: string
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
-                    description: ISO 8601 Combined Date and Time 
+                    description: ISO 8601 Combined Date and Time
                   HireDate:
                     type: string
                     format: date-time
                     example: "2019-10-12T07:20:50.52Z"
-                    description: ISO 8601 Combined Date and Time 
+                    description: ISO 8601 Combined Date and Time
                   Address:
                     type: string
+                    maxLength: 70
                     example: "Street 78th"
                   City:
                     type: string
+                    maxLength: 40
                     example: "Kigaly"
                   State:
                     type: string
+                    maxLength: 40
                     example: "Kigaly"
                   Country:
                     type: string
+                    maxLength: 40
                     example: "Ruanda"
                   PostalCode:
                     type: string
+                    maxLength: 10
                     example: "003000"
                   Phone:
                     type: string
+                    maxLength: 24
                     example: "01-123456789"
                   Fax: 
                     type: string
+                    maxLength: 24
                     example: "123456"
                   Email:
                     type: string
+                    maxLength: 60
                     example: "abc123@server1.com"
         '401':
           "$ref": "#/components/responses/_401"  
@@ -642,6 +704,7 @@ paths:
                 Properties:
                   DeletedItemId:
                     type: integer
+                    minimum: 1
         '401':
           "$ref": "#/components/responses/_401"
         '404':
@@ -697,19 +760,22 @@ paths:
                         InvoiceId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         CustomerId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         InvoiceDate:
                           type: string
                           format: date-time
                           example: "2019-10-12T07:20:50.52Z"
-                          description: ISO 8601 Combined Date and Time"                      
+                          description: ISO 8601 Combined Date and Time
                         Total:
                           type: number
                           format: double
+                          minimum: 0.0
                           example: 3.26
         '401':
           "$ref": "#/components/responses/_401" 
@@ -743,10 +809,12 @@ paths:
                     InvoiceId:
                       type: integer
                       format: int64
+                      minimum: 1
                       example: 101
                     CustomerId:
                       type: integer
                       format: int64
+                      minimum: 1
                       example: 101
                     InvoiceDate:
                       type: string
@@ -755,22 +823,28 @@ paths:
                       description: ISO 8601 Combined Date and Time
                     BillingAddress:
                       type: string
+                      maxLength: 70
                       example: "Kigaly"
                     BillingCity:
                       type: string
+                      maxLength: 40
                       example: "Kigaly"
                     BillingState :
                       type: string
+                      maxLength: 40
                       example: "Kigaly"
                     BillingCountry:
                       type: string
+                      maxLength: 40
                       example: "Kigaly"
                     BillingPostalCode:
                     type: string
+                    maxLength: 10
                     example: "Kigaly"                    
                     Total:
                       type: number
                       format: double
+                      minimum: 0.0
                       example: 3.26
         '401':
           "$ref": "#/components/responses/_401"
@@ -827,25 +901,31 @@ paths:
                         TrackId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         Name:
                           type: string
+                          maxLength: 200
                           example: "Apple"
                         AlbumId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         MediaTypeId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         GenreId:
                           type: integer
+                          minimum: 1
                           format: int64
                           example: 101
                         UnitPrice:
                           type: number
                           format: double
+                          minimum: 0.0
                           example: 3.26
         '401':
           "$ref": "#/components/responses/_401"  
@@ -875,29 +955,36 @@ paths:
               Properties:
                 Name:
                   type: string
+                  maxLength: 200
                   example: "Apple"
                 AlbumId:
                   type: integer
                   format: int64
+                  minimum: 1
                   example: 101
                 MediaTypeId:
                   type: integer
                   format: int64
+                  minimum: 1
                   example: 101
                 GenreId:
                   type: integer
                   format: int64
+                  minimum: 1
                   example: 101
                 Composer:
                   type: string
+                  maxLength: 220
                   example: "Mariano"
                 Milliseconds:
                   type: integer
                   format: int64
+                  maximum: 1200000
                   example: 101
                 Bytes:
                   type: integer
                   format: int64
+                  maximum: 1500000000
                   example: 101                                    
                 UnitPrice:
                   type: number
@@ -930,32 +1017,40 @@ paths:
                   TrackId:
                     type: integer
                     format: int64
+                    minimum: 1
                     example: 101                
                   Name:
                     type: string
+                    maxLength: 200
                     example: "Apple"
                   AlbumId:
                     type: integer
                     format: int64
+                    minimum: 1
                     example: 101
                   MediaTypeId:
                     type: integer
+                    minimum: 1
                     format: int64
                     example: 101
                   GenreId:
                     type: integer
                     format: int64
+                    minimum: 1
                     example: 101
                   Composer:
                     type: string
+                    maxLength: 220
                     example: "Mariano"
                   Milliseconds:
                     type: integer
                     format: int64
+                    maximum: 1200000
                     example: 101
                   Bytes:
                     type: integer
                     format: int64
+                    maximum: 1500000000
                     example: 101                                    
                   UnitPrice:
                     type: number
@@ -992,20 +1087,25 @@ paths:
                     TrackId:
                       type: integer
                       format: int64
+                      minimum: 1
                       example: 101
                     Name:
                       type: string
+                      maxLength: 200
                       example: "Apple"
                     AlbumId:
                       type: integer
+                      minimum: 1
                       format: int64
                       example: 101
                     MediaTypeId:
                       type: integer
+                      minimum: 1
                       format: int64
                       example: 101
                     GenreId:
                       type: integer
+                      minimum: 1
                       format: int64
                       example: 101
                     UnitPrice:
@@ -1033,6 +1133,7 @@ paths:
                 Properties:
                   DeletedTrackId:
                     type: integer
+                    minimum: 1
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -1088,21 +1189,26 @@ paths:
                         TrackId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         Name:
                           type: string
+                          maxLength: 200
                           example: "Apple"
                         AlbumId:
                           type: integer
+                          minimum: 1
                           format: int64
                           example: 101
                         MediaTypeId:
                           type: integer
+                          minimum: 1
                           format: int64
                           example: 101
                         GenreId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         UnitPrice:
                           type: number
@@ -1123,6 +1229,8 @@ paths:
       required: true
       schema:
         type: string
+        minLength: 4
+        maxLength: 16
     - name: page
       in: query
       description: Page number for pagination, base64url encoded
@@ -1169,16 +1277,20 @@ paths:
                         CustomerId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         FirstName:
                           type: string
+                          maxLength: 40
                           example: "Apple"
                         LastName:
                           type: integer
                           format: int64
+                          maxLength: 40
                           example: 101
                         SupportRepId:
                           type: integer
+                          minimum: 1
                           format: int64
                           example: 101
         '401':
@@ -1213,41 +1325,52 @@ paths:
               Properties:
               FirstName:
                   type: string
+                  maxLength: 40
                   example: "Apple"
               LastName:
-                  type: integer
-                  format: int64
-                  example: 101
+                  type: string
+                  maxLength: 40
+                  example: "apple"
               Company:
                   type: string
+                  maxLength: 80
                   example: apple
               Address:
                   type: string
+                  maxLength: 70
                   example: apple
               City:
                   type: string
+                  maxLength: 40
                   example: apple
               State:
                   type: string
+                  maxLength: 40
                   example: apple
               Country:
                   type: string
+                  maxLength: 40
                   example: apple
               PostalCode: 
                   type: string
+                  maxLength: 10
                   example: apple
               Phone: 
                   type: string
+                  maxLength: 24
                   example: apple
               Fax: 
                   type: string
-                  example: apple  
+                  maxLength: 24
+                  example: apple
               Email: 
                   type: string
-                  example: apple                                  
+                  maxLength: 60
+                  example: apple                               
               SupportRepId:
                   type: integer
                   format: int64
+                  minimum: 1
                   example: 101                  
       responses:
         '201':
@@ -1276,44 +1399,55 @@ paths:
                   - Email       
                   - SupportRepId 
                 Properties:
-                FirstName:
-                    type: string
-                    example: "Apple"
-                LastName:
-                    type: integer
-                    format: int64
-                    example: 101
-                Company:
-                    type: string
-                    example: apple
-                Address:
-                    type: string
-                    example: apple
-                City:
-                    type: string
-                    example: apple
-                State:
-                    type: string
-                    example: apple
-                Country:
-                    type: string
-                    example: apple
-                PostalCode: 
-                    type: string
-                    example: apple
-                Phone: 
-                    type: string
-                    example: apple
-                Fax: 
-                    type: string
-                    example: apple  
-                Email: 
-                    type: string
-                    example: apple                                  
-                SupportRepId:
-                    type: integer
-                    format: int64
-                    example: 101
+              FirstName:
+                  type: string
+                  maxLength: 40
+                  example: "Apple"
+              LastName:
+                  type: string
+                  maxLength: 40
+                  example: "apple"
+              Company:
+                  type: string
+                  maxLength: 80
+                  example: apple
+              Address:
+                  type: string
+                  maxLength: 70
+                  example: apple
+              City:
+                  type: string
+                  maxLength: 40
+                  example: apple
+              State:
+                  type: string
+                  maxLength: 40
+                  example: apple
+              Country:
+                  type: string
+                  maxLength: 40
+                  example: apple
+              PostalCode: 
+                  type: string
+                  maxLength: 10
+                  example: apple
+              Phone: 
+                  type: string
+                  maxLength: 24
+                  example: apple
+              Fax: 
+                  type: string
+                  maxLength: 24
+                  example: apple
+              Email: 
+                  type: string
+                  maxLength: 60
+                  example: apple
+              SupportRepId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 101   
         '400':
           "$ref": "#/components/responses/_400"           
         '401':
@@ -1355,42 +1489,53 @@ paths:
                       example: 101
                     FirstName:
                       type: string
+                      maxLength: 40
                       example: "Apple"
                     LastName:
-                      type: integer
-                      format: int64
-                      example: 101
+                      type: string
+                      maxLength: 40
+                      example: "apple"
                     Company:
                       type: string
-                      example: "Apple"                         
-                    Address:     
+                      maxLength: 80
+                      example: apple
+                    Address:
                       type: string
-                      example: "Apple"                    
+                      maxLength: 70
+                      example: apple
                     City:
                       type: string
-                      example: "Apple"                            
+                      maxLength: 40
+                      example: apple
                     State:
                       type: string
-                      example: "Apple"                           
+                      maxLength: 40
+                      example: apple
                     Country:
                       type: string
-                      example: "Apple"                         
-                    PostalCode:
+                      maxLength: 40
+                      example: apple
+                    PostalCode: 
                       type: string
-                      example: "Apple"                      
-                    Phone:
+                      maxLength: 10
+                      example: apple
+                    Phone: 
                       type: string
-                      example: "Apple"                           
-                    Fax:
+                      maxLength: 24
+                      example: apple
+                    Fax: 
                       type: string
-                      example: "Apple"                             
-                    Email:
+                      maxLength: 24
+                      example: apple
+                    Email: 
                       type: string
-                      example: "Apple"                     
+                      maxLength: 60
+                      example: apple
                     SupportRepId:
                       type: integer
                       format: int64
-                      example: 101
+                      minimum: 1
+                      example: 101   
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -1412,6 +1557,7 @@ paths:
                 Properties:
                   DeletedTrackId:
                     type: integer
+                    minimum: 1
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -1466,20 +1612,25 @@ paths:
                         TrackId:
                           type: integer
                           format: int64
+                          minimum: 1
                           example: 101
                         Name:
                           type: string
-                          example: "John"
+                          maxLength: 200
+                          example: Prince of the down
                         UnitPrice:
                           type: number
                           format: double
+                          minimum: 0.0
                           example: 2.36
                         Quantity:
                           type: integer
+                          minimum: 0
                           example: 3
                         Total:
                           type: number
                           format: double
+                          minimum: 0.0
                           example: 2.36                      
         '401':
           "$ref": "#/components/responses/_401"
@@ -1510,16 +1661,20 @@ paths:
                     EmployeeId:
                       type: integer
                       format: int64
+                      minimum: 1
                       example: 101
                     FirstName:
                       type: string
-                      example: "John"
+                      maxLength: 20
+                      example: John
                     LastName:
                       type: string
+                      maxLength: 20
                       example: "Ortega"
                     TotalSales:
                       type: number
                       format: double
+                      minimum: 0.0
                       example: 27.59                      
         '401':
           "$ref": "#/components/responses/_401"  
@@ -1548,12 +1703,15 @@ paths:
                   Properties:
                     Year:
                       type: string
+                      maxLength: 4
                       example: "2013"
                     Quarter:
                       type: string
+                      maxLength: 12
                       example: "First"
                     TotalAmount:
                       type: number
+                      minimum: 0.0
                       format: double
                       example: 2700.59                      
         '401':
@@ -1591,9 +1749,11 @@ components:
             Properties:
               error:
                 type: string
+                maxLength: 60
                 example: "Unauthorized"
               message:
                 type: string
+                maxLength: 90
                 example: "Missing or invalid token."
       headers:      
         WWW-Authenticate:
@@ -1612,9 +1772,11 @@ components:
             Properties:
               error:
                 type: string
+                maxLength: 60
                 example: "Not found"
               message:
                 type: string
+                maxLength: 90
                 example: "The requested resource, {user} with ID {123}, could not be found on this server."
     _503:
       description: Server maintenance. 
@@ -1629,15 +1791,17 @@ components:
             Properties:
               error:
                 type: string
+                maxLength: 60
                 example: "Service Unavailable."
               message:
                 type: string
+                maxLength: 90
                 example: "We're currently upgrading our systems. Please check back at {Time}."
               timestamp:
                 type: string
                 format: date-time
                 example: "2019-10-12T07:20:50.52Z"
-                description: ISO 8601 Combined Date and Time                              
+                description: ISO 8601 Combined Date and Time
   securitySchemes:
     bearerAuth:
       type: http
