@@ -323,9 +323,7 @@ paths:
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
-          "$ref": "#/components/responses/_401"  
-        '404':
-          "$ref": "#/components/responses/_404"            
+          "$ref": "#/components/responses/_401"             
         '503':
           "$ref": "#/components/responses/_503"                           
     parameters:       
@@ -848,6 +846,8 @@ paths:
                       example: 3.26
         '401':
           "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"          
         '503':
           "$ref": "#/components/responses/_503"                                            
     parameters:      
@@ -1113,7 +1113,9 @@ paths:
                       format: double
                       example: 3.26
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"
         '503':
           "$ref": "#/components/responses/_503"           
     delete:
@@ -1135,7 +1137,9 @@ paths:
                     type: integer
                     minimum: 1
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"            
         '503':
           "$ref": "#/components/responses/_503"                                     
     parameters:      
@@ -1217,9 +1221,7 @@ paths:
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
-          "$ref": "#/components/responses/_401" 
-        '404':
-          "$ref": "#/components/responses/_404"           
+          "$ref": "#/components/responses/_401"           
         '503':
           "$ref": "#/components/responses/_503"                           
     parameters:       
@@ -1537,7 +1539,9 @@ paths:
                       minimum: 1
                       example: 101   
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"            
         '503':
           "$ref": "#/components/responses/_503"         
     delete:
@@ -1559,7 +1563,9 @@ paths:
                     type: integer
                     minimum: 1
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"  
         '503':
           "$ref": "#/components/responses/_503"                                   
     parameters:      
