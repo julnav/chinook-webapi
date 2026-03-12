@@ -235,7 +235,64 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"                     
         '503':
-          "$ref": "#/components/responses/_503"          
+          "$ref": "#/components/responses/_503"
+    put:
+      tags:
+        - Update Album
+      description: Updates an album
+      operationId: updateAlbum
+      requestBody:
+        description: album to update
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              Properties:
+                Title:
+                  type: string
+                  maxLength: 160
+                  example: "Apple"
+                ArtistId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 10
+      responses:
+        '200':
+          description: Ok
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - AlbumId
+                - Title
+                - ArtistId
+                Properties:
+                  AlbumId:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    example: 101
+                  Title:
+                    type: string
+                    maxLength: 160
+                    example: "Apple"
+                  ArtistId:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    example: 101
+        '400':
+          "$ref": "#/components/responses/_400"                     
+        '401':
+          "$ref": "#/components/responses/_401"                    
+        '404':
+          "$ref": "#/components/responses/_404"                     
+        '503':
+          "$ref": "#/components/responses/_503"                     
     delete:
       tags:
         - Delete an album 
@@ -265,10 +322,11 @@ paths:
     parameters:      
     - name: AlbumId
       in: path
-      description: the album's id
+      description: Numeric ID of the album to update
       required: true
       schema:
         type: integer
+        format: int64        
         minimum: 1              
   /webapi/v1/albums/search:
     description: Returns a paginated list of albums from a search result.
@@ -684,7 +742,174 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"           
         '503':
-          "$ref": "#/components/responses/_503"               
+          "$ref": "#/components/responses/_503"
+    put:
+      tags:
+        - UpdateEmployee
+      description: Updates an employee
+      operationId: updateEmployee
+      requestBody:
+        description: employee to update
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              Properties:
+                LastName :
+                  type: string
+                  maxLength: 20
+                  example: "O'hara"
+                FirstName:
+                  type: string
+                  maxLength: 20
+                  example: "Oscar"
+                Title:
+                  type: string
+                  maxLength: 30
+                  example: "Supervisor"
+                ReportsTo:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 101
+                BirthDate:
+                  type: string
+                  format: date-time
+                  example: "2019-10-12T07:20:50.52Z"
+                  description: ISO 8601 Combined Date and Time
+                HireDate:
+                  type: string
+                  format: date-time
+                  example: "2019-10-12T07:20:50.52Z"
+                  description: ISO 8601 Combined Date and Time
+                Address:
+                  type: string
+                  maxLength: 70
+                  example: "Street 78th"
+                City:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                State:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                Country:
+                  type: string
+                  maxLength: 40
+                  example: "Ruanda"
+                PostalCode:
+                  type: string
+                  maxLength: 10
+                  example: "003000"
+                Phone:
+                  type: string
+                  maxLength: 24
+                  example: "01-123456789"
+                Fax: 
+                  type: string
+                  maxLength: 24
+                  example: "123456"
+                Email:
+                  type: string
+                  maxLength: 60
+                  example: "abc123@server1.com"                     
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - EmployeeId
+                  - LastName  
+                  - FirstName 
+                  - Title     
+                  - ReportsTo 
+                  - BirthDate 
+                  - HireDate  
+                  - Address   
+                  - City      
+                  - State     
+                  - Country   
+                  - PostalCode
+                  - Phone     
+                  - Fax       
+                  - Email 
+                Properties:
+                  EmployeeId:
+                    type: integer
+                    sormat: int64
+                    example: 101
+                  LastName :
+                    type: string
+                    maxLength: 20
+                    example: "O'hara"
+                  FirstName:
+                    type: string
+                    maxLength: 20
+                    example: "Oscar"
+                  Title:
+                    type: string
+                    maxLength: 30
+                    example: "Supervisor"
+                  ReportsTo:
+                    type: integer
+                    sormat: int64
+                    minimum: 1
+                    example: 101
+                  BirthDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time
+                  HireDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time
+                  Address:
+                    type: string
+                    maxLength: 70
+                    example: "Street 78th"
+                  City:
+                    type: string
+                    maxLength: 40
+                    example: "Kigaly"
+                  State:
+                    type: string
+                    maxLength: 40
+                    example: "Kigaly"
+                  Country:
+                    type: string
+                    maxLength: 40
+                    example: "Ruanda"
+                  PostalCode:
+                    type: string
+                    maxLength: 10
+                    example: "003000"
+                  Phone:
+                    type: string
+                    maxLength: 24
+                    example: "01-123456789"
+                  Fax: 
+                    type: string
+                    maxLength: 24
+                    example: "123456"
+                  Email:
+                    type: string
+                    maxLength: 60
+                    example: "abc123@server1.com"
+        '400':
+          "$ref": "#/components/responses/_400"                     
+        '401':
+          "$ref": "#/components/responses/_401"                    
+        '404':
+          "$ref": "#/components/responses/_404"                     
+        '503':
+          "$ref": "#/components/responses/_503"                          
     delete:
       tags:
         - DeleteEmployeesById 
@@ -703,12 +928,14 @@ paths:
                   DeletedItemId:
                     type: integer
                     minimum: 1
+        '400':
+          "$ref": "#/components/responses/_400"                     
         '401':
-          "$ref": "#/components/responses/_401"
+          "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"            
+          "$ref": "#/components/responses/_404"                     
         '503':
-          "$ref": "#/components/responses/_503"         
+          "$ref": "#/components/responses/_503"       
     parameters:      
       - name: EmployeeId
         in: path
@@ -849,16 +1076,120 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"          
         '503':
-          "$ref": "#/components/responses/_503"                                            
+          "$ref": "#/components/responses/_503"
+    put:
+      tags:
+        - Update invoice
+      description: Update an invoices
+      operationId: updateInvoice
+      requestBody:
+        description: Invoice to update
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              Properties:
+                CustomerId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 101
+                InvoiceDate:
+                  type: string
+                  format: date-time
+                  example: "2019-10-12T07:20:50.52Z"
+                  description: ISO 8601 Combined Date and Time
+                BillingAddress:
+                  type: string
+                  maxLength: 70
+                  example: "Kigaly"
+                BillingCity:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingState :
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingCountry:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingPostalCode:
+                type: string
+                maxLength: 10
+                example: "Kigaly"                    
+                Total:
+                  type: number
+                  format: double
+                  minimum: 0.0
+                  example: 3.26              
+      responses:
+        '200':
+          description: Ok
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                Properties:
+                  InvoiceId:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    example: 101
+                  CustomerId:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    example: 101
+                  InvoiceDate:
+                    type: string
+                    format: date-time
+                    example: "2019-10-12T07:20:50.52Z"
+                    description: ISO 8601 Combined Date and Time
+                  BillingAddress:
+                    type: string
+                    maxLength: 70
+                    example: "Kigaly"
+                  BillingCity:
+                    type: string
+                    maxLength: 40
+                    example: "Kigaly"
+                  BillingState :
+                    type: string
+                    maxLength: 40
+                    example: "Kigaly"
+                  BillingCountry:
+                    type: string
+                    maxLength: 40
+                    example: "Kigaly"
+                  BillingPostalCode:
+                  type: string
+                  maxLength: 10
+                  example: "Kigaly"                    
+                  Total:
+                    type: number
+                    format: double
+                    minimum: 0.0
+                    example: 3.26 
+        '400':
+          "$ref": "#/components/responses/_400"                     
+        '401':
+          "$ref": "#/components/responses/_401"                    
+        '404':
+          "$ref": "#/components/responses/_404"                     
+        '503':
+          "$ref": "#/components/responses/_503"
     parameters:      
     - name: InvoiceId
       in: path
-      description: Path id parameter
+      description: Numeric ID of the invoice to update
       required: true
       schema:
         type: integer
         minimum: 1
-        description: positive number
   /webapi/v1/tracks:
     description: Returns a paginated list of tracks (songs).
     get:
@@ -1117,7 +1448,94 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"
         '503':
-          "$ref": "#/components/responses/_503"           
+          "$ref": "#/components/responses/_503"
+    put:
+      tags:
+        - Update Track 
+      description: Updates a track
+      operationId: updateTrack
+      requestBody:
+        description: Track to update
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                Name:
+                  type: string
+                  maxLength: 200
+                  example: "Apple"
+                AlbumId:
+                  type: integer
+                  minimum: 1
+                  format: int64
+                  example: 101
+                MediaTypeId:
+                  type: integer
+                  minimum: 1
+                  format: int64
+                  example: 101
+                GenreId:
+                  type: integer
+                  minimum: 1
+                  format: int64
+                  example: 101
+                UnitPrice:
+                  type: number
+                  format: double
+                  example: 3.26
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                  type: object
+                  required:
+                    - TrackId     
+                    - Name        
+                    - AlbumId     
+                    - MediaTypeId 
+                    - GenreId           
+                    - UnitPrice 
+                  Properties:
+                    TrackId:
+                      type: integer
+                      format: int64
+                      minimum: 1
+                      example: 101
+                    Name:
+                      type: string
+                      maxLength: 200
+                      example: "Apple"
+                    AlbumId:
+                      type: integer
+                      minimum: 1
+                      format: int64
+                      example: 101
+                    MediaTypeId:
+                      type: integer
+                      minimum: 1
+                      format: int64
+                      example: 101
+                    GenreId:
+                      type: integer
+                      minimum: 1
+                      format: int64
+                      example: 101
+                    UnitPrice:
+                      type: number
+                      format: double
+                      example: 3.26
+        '400':
+          "$ref": "#/components/responses/_400"                     
+        '401':
+          "$ref": "#/components/responses/_401"                    
+        '404':
+          "$ref": "#/components/responses/_404"                     
+        '503':
+          "$ref": "#/components/responses/_503"                      
     delete:
       tags:
         - DeleteTrackById 
@@ -1543,7 +1961,152 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"            
         '503':
-          "$ref": "#/components/responses/_503"         
+          "$ref": "#/components/responses/_503"
+    put:
+      tags:
+        - Update a customer 
+      description: Updates a customer
+      operationId: updateCustomer
+      requestBody:
+        description: Customer to update
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties: 
+                FirstName:
+                  type: string
+                  maxLength: 40
+                  example: "Apple"
+                LastName:
+                  type: string
+                  maxLength: 40
+                  example: "apple"
+                Company:
+                  type: string
+                  maxLength: 80
+                  example: apple
+                Address:
+                  type: string
+                  maxLength: 70
+                  example: apple
+                City:
+                  type: string
+                  maxLength: 40
+                  example: apple
+                State:
+                  type: string
+                  maxLength: 40
+                  example: apple
+                Country:
+                  type: string
+                  maxLength: 40
+                  example: apple
+                PostalCode: 
+                  type: string
+                  maxLength: 10
+                  example: apple
+                Phone: 
+                  type: string
+                  maxLength: 24
+                  example: apple
+                Fax: 
+                  type: string
+                  maxLength: 24
+                  example: apple
+                Email: 
+                  type: string
+                  maxLength: 60
+                  example: apple
+                SupportRepId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 101  
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - CustomerId  
+                  - FirstName   
+                  - LastName                  
+                  - SupportRepId
+                  - Company     
+                  - Address     
+                  - City        
+                  - State       
+                  - Country     
+                  - PostalCode  
+                  - Phone       
+                  - Fax         
+                  - Email 
+                Properties:
+                  CustomerId:
+                    type: integer
+                    format: int64
+                    example: 101
+                  FirstName:
+                    type: string
+                    maxLength: 40
+                    example: "Apple"
+                  LastName:
+                    type: string
+                    maxLength: 40
+                    example: "apple"
+                  Company:
+                    type: string
+                    maxLength: 80
+                    example: apple
+                  Address:
+                    type: string
+                    maxLength: 70
+                    example: apple
+                  City:
+                    type: string
+                    maxLength: 40
+                    example: apple
+                  State:
+                    type: string
+                    maxLength: 40
+                    example: apple
+                  Country:
+                    type: string
+                    maxLength: 40
+                    example: apple
+                  PostalCode: 
+                    type: string
+                    maxLength: 10
+                    example: apple
+                  Phone: 
+                    type: string
+                    maxLength: 24
+                    example: apple
+                  Fax: 
+                    type: string
+                    maxLength: 24
+                    example: apple
+                  Email: 
+                    type: string
+                    maxLength: 60
+                    example: apple
+                  SupportRepId:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    example: 101   
+        '400':
+          "$ref": "#/components/responses/_400"                     
+        '401':
+          "$ref": "#/components/responses/_401"                    
+        '404':
+          "$ref": "#/components/responses/_404"                     
+        '503':
+          "$ref": "#/components/responses/_503"  
     delete:
       tags:
         - DeleteCustomerById 
