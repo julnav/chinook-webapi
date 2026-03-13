@@ -613,6 +613,8 @@ paths:
           "$ref": "#/components/responses/_400"           
         '401':
           "$ref": "#/components/responses/_401"
+        '409':
+          "$ref": "#/components/responses/_409" 
         '503':
           "$ref": "#/components/responses/_503"                                     
   /webapi/v1/employees/{EmployeeId}:
@@ -875,7 +877,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"                     
+          "$ref": "#/components/responses/_404"
+        '409':
+          "$ref": "#/components/responses/_409"                                
         '503':
           "$ref": "#/components/responses/_503"                          
     delete:
@@ -1783,6 +1787,8 @@ paths:
           "$ref": "#/components/responses/_400"           
         '401':
           "$ref": "#/components/responses/_401"
+        '409':
+          "$ref": "#/components/responses/_409" 
         '503':
           "$ref": "#/components/responses/_503"                                    
   /webapi/v1/customers/{CustomerId}:
@@ -2010,7 +2016,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"                     
+          "$ref": "#/components/responses/_404"
+        '409':
+          "$ref": "#/components/responses/_409"                                
         '503':
           "$ref": "#/components/responses/_503"  
     delete:
@@ -2252,6 +2260,29 @@ components:
                 type: string
                 maxLength: 90
                 example: "The requested resource, {user} with ID {123}, could not be found on this server."
+    _409:              
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+              - message
+              - conflicting_field
+            properties:
+              error:
+                type: string
+                maxLength: 32
+                example: Email error
+              message:
+                type: string
+                maxLength: 42
+                example: This email is already been use in this server
+              conflicting_field:
+                type: string
+                maxLength: 32
+                example: "email: {moraz12@gmail.com}"
     _503:
       description: Server maintenance. 
       content:
