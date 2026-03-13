@@ -53,10 +53,12 @@ paths:
                   status:
                     type: enum
                     enum: [Active, Suspended, Deleted]
+                    example: Active
                   receive_offer:
                     type: integer
                     minimum: 0
                     maximum: 1
+                    example: 0
                   public_key :
                     type: string
                     description: 32 character long string
@@ -103,10 +105,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request 
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6  
                   data:
                     type: array
                     items:
@@ -120,6 +124,7 @@ paths:
                         type: integer
                         format: int64
                         minimum: 1
+                        example: 1
                       Title:
                         type: string
                         maxLength: 160
@@ -128,6 +133,7 @@ paths:
                         type: integer
                         format: int64
                         minimum: 1
+                        example: 1
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -156,6 +162,7 @@ paths:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
       responses:
         '201':
           description: Created
@@ -178,6 +185,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   Title:
                     type: string
                     maxLength: 160
@@ -186,6 +194,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
         '400':
           "$ref": "#/components/responses/_400"           
         '401':
@@ -215,6 +224,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   Title:
                     type: string
                     maxLength: 160
@@ -223,6 +233,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
@@ -250,6 +261,7 @@ paths:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
       responses:
         '200':
           description: Ok
@@ -266,6 +278,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   Title:
                     type: string
                     maxLength: 160
@@ -274,6 +287,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
         '400':
           "$ref": "#/components/responses/_400"                     
         '401':
@@ -300,6 +314,7 @@ paths:
                   DeletedAlbumId:
                     type: integer
                     minimum: 1
+                    example: 1
         '400':
           "$ref": "#/components/responses/_400"                    
         '401':
@@ -316,7 +331,8 @@ paths:
       schema:
         type: integer
         format: int64        
-        minimum: 1              
+        minimum: 1
+        example: 1              
   /webapi/v1/albums/search:
     description: Returns a paginated list of albums from a search result.
     get:
@@ -340,10 +356,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request 
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6 
                   data:
                     type: array
                     items:
@@ -357,6 +375,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         Title:
                           type: string
                           maxLength: 160
@@ -365,6 +384,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
@@ -409,10 +429,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request   
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6   
                   data:                 
                     type: array
                     items:
@@ -427,6 +449,7 @@ paths:
                           type: integer
                           minimum: 1
                           format: int64
+                          example: 1
                         LastName :
                           type: string
                           maxLength: 20
@@ -434,7 +457,7 @@ paths:
                         FirstName:
                           type: string
                           maxLength: 20
-                          example: "Apple"
+                          example: "Hernandez"
                         Title:
                           type: string
                           maxLength: 30
@@ -475,6 +498,7 @@ paths:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
                 BirthDate:
                   type: string
                   format: date-time
@@ -551,6 +575,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   LastName :
                     type: string
                     maxLength: 20
@@ -567,6 +592,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   BirthDate:
                     type: string
                     format: date-time
@@ -650,7 +676,8 @@ paths:
                 properties:
                   EmployeeId:
                     type: integer
-                    format: int64                    
+                    format: int64
+                    example: 1                    
                   LastName :
                     type: string
                     maxLength: 20
@@ -667,6 +694,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   BirthDate:
                     type: string
                     format: date-time
@@ -744,6 +772,7 @@ paths:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
                 BirthDate:
                   type: string
                   format: date-time
@@ -814,6 +843,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   LastName :
                     type: string
                     maxLength: 20
@@ -830,6 +860,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   BirthDate:
                     type: string
                     format: date-time
@@ -939,10 +970,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request 
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6  
                   data:       
                     type: array
                     items:
@@ -957,10 +990,12 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         CustomerId:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         InvoiceDate:
                           type: string
                           format: date-time
@@ -1004,10 +1039,12 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   CustomerId:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   InvoiceDate:
                     type: string
                     format: date-time
@@ -1061,6 +1098,7 @@ paths:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
                 InvoiceDate:
                   type: string
                   format: date-time
@@ -1103,10 +1141,12 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 
                   CustomerId:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   InvoiceDate:
                     type: string
                     format: date-time
@@ -1176,10 +1216,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request 
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6  
                   data:                       
                     type: array
                     items:
@@ -1196,6 +1238,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: Active
                         Name:
                           type: string
                           maxLength: 200
@@ -1204,14 +1247,17 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         MediaTypeId:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         GenreId:
                           type: integer
                           minimum: 1
                           format: int64
+                          example: 1
                         UnitPrice:
                           type: number
                           format: double
@@ -1247,14 +1293,17 @@ paths:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
                 MediaTypeId:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
                 GenreId:
                   type: integer
                   format: int64
                   minimum: 1
+                  example: 1
                 Composer:
                   type: string
                   maxLength: 220
@@ -1263,10 +1312,12 @@ paths:
                   type: integer
                   format: int64
                   maximum: 1200000
+                  example: 130654
                 Bytes:
                   type: integer
                   format: int64
-                  maximum: 1500000000                                   
+                  maximum: 1500000000       
+                  example: 76500000                            
                 UnitPrice:
                   type: number
                   format: double
@@ -1298,7 +1349,8 @@ paths:
                   TrackId:
                     type: integer
                     format: int64
-                    minimum: 1               
+                    minimum: 1
+                    example: 1               
                   Name:
                     type: string
                     maxLength: 200
@@ -1307,14 +1359,17 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   MediaTypeId:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   GenreId:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   Composer:
                     type: string
                     maxLength: 220
@@ -1323,10 +1378,12 @@ paths:
                     type: integer
                     format: int64
                     maximum: 1200000
+                    example: 650012
                   Bytes:
                     type: integer
                     format: int64
-                    maximum: 1500000000                                   
+                    maximum: 1500000000
+                    example: 8761411                                   
                   UnitPrice:
                     type: number
                     format: double
@@ -1363,6 +1420,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   Name:
                     type: string
                     maxLength: 200
@@ -1371,14 +1429,17 @@ paths:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   MediaTypeId:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   GenreId:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   UnitPrice:
                     type: number
                     format: double
@@ -1410,14 +1471,17 @@ paths:
                   type: integer
                   minimum: 1
                   format: int64
+                  example: 1
                 MediaTypeId:
                   type: integer
                   minimum: 1
                   format: int64
+                  example: 1
                 GenreId:
                   type: integer
                   minimum: 1
                   format: int64
+                  example: 1
                 UnitPrice:
                   type: number
                   format: double
@@ -1441,6 +1505,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
+                    example: 1
                   Name:
                     type: string
                     maxLength: 200
@@ -1449,14 +1514,17 @@ paths:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   MediaTypeId:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   GenreId:
                     type: integer
                     minimum: 1
                     format: int64
+                    example: 1
                   UnitPrice:
                     type: number
                     format: double
@@ -1524,10 +1592,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request  
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6   
                   data:                      
                     type: array
                     items:
@@ -1544,6 +1614,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         Name:
                           type: string
                           maxLength: 200
@@ -1552,6 +1623,7 @@ paths:
                           type: integer
                           minimum: 1
                           format: int64
+                          example: 1
                         MediaTypeId:
                           type: integer
                           minimum: 1
@@ -1560,6 +1632,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         UnitPrice:
                           type: number
                           format: double
@@ -1608,10 +1681,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request 
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6  
                   data:                         
                     type: array
                     items:
@@ -1626,6 +1701,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         FirstName:
                           type: string
                           maxLength: 40
@@ -1638,6 +1714,7 @@ paths:
                           type: integer
                           minimum: 1
                           format: int64
+                          example: 1
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -1690,23 +1767,24 @@ paths:
               PostalCode: 
                   type: string
                   maxLength: 10
-                  example: apple
+                  example: 03000
               Phone: 
                   type: string
                   maxLength: 24
-                  example: apple
+                  example: 02-55555555
               Fax: 
                   type: string
                   maxLength: 24
-                  example: apple
+                  example: 123456789
               Email: 
                   type: string
                   maxLength: 60
-                  example: apple                               
+                  example: apple68@yahoo.com                               
               SupportRepId:
                   type: integer
                   format: int64
-                  minimum: 1                 
+                  minimum: 1
+                  example: 1                 
       responses:
         '201':
           description: Created
@@ -1738,11 +1816,11 @@ paths:
                   FirstName:
                       type: string
                       maxLength: 40
-                      example: "Apple"
+                      example: "Mark"
                   LastName:
                       type: string
                       maxLength: 40
-                      example: "apple"
+                      example: "Johnson"
                   Company:
                       type: string
                       maxLength: 80
@@ -1774,15 +1852,16 @@ paths:
                   Fax: 
                       type: string
                       maxLength: 24
-                      example: apple
+                      example: 12345678
                   Email: 
                       type: string
                       maxLength: 60
-                      example: apple
+                      example: apple68@yahoo.com
                   SupportRepId:
                       type: integer
                       format: int64
-                      minimum: 1 
+                      minimum: 1
+                      example: 1 
         '400':
           "$ref": "#/components/responses/_400"           
         '401':
@@ -1823,14 +1902,15 @@ paths:
                   CustomerId:
                     type: integer
                     format: int64
+                    example: 1
                   FirstName:
                     type: string
                     maxLength: 40
-                    example: "Apple"
+                    example: "Martha"
                   LastName:
                     type: string
                     maxLength: 40
-                    example: "apple"
+                    example: "Smith"
                   Company:
                     type: string
                     maxLength: 80
@@ -1838,11 +1918,11 @@ paths:
                   Address:
                     type: string
                     maxLength: 70
-                    example: apple
+                    example: apple 78th
                   City:
                     type: string
                     maxLength: 40
-                    example: apple
+                    example: Minesota
                   State:
                     type: string
                     maxLength: 40
@@ -1871,6 +1951,7 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1  
+                    example: 1
         '401':
           "$ref": "#/components/responses/_401"
         '404':
@@ -1893,11 +1974,11 @@ paths:
                 FirstName:
                   type: string
                   maxLength: 40
-                  example: "Apple"
+                  example: "Kira"
                 LastName:
                   type: string
                   maxLength: 40
-                  example: "apple"
+                  example: "Maria"
                 Company:
                   type: string
                   maxLength: 80
@@ -1905,11 +1986,11 @@ paths:
                 Address:
                   type: string
                   maxLength: 70
-                  example: apple
+                  example: 7th street
                 City:
                   type: string
                   maxLength: 40
-                  example: apple
+                  example: Florida
                 State:
                   type: string
                   maxLength: 40
@@ -1937,7 +2018,8 @@ paths:
                 SupportRepId:
                   type: integer
                   format: int64
-                  minimum: 1  
+                  minimum: 1
+                  example: 1  
       responses:
         '200':
           description: Ok
@@ -1963,6 +2045,7 @@ paths:
                   CustomerId:
                     type: integer
                     format: int64
+                    example: 1
                   FirstName:
                     type: string
                     maxLength: 40
@@ -2010,7 +2093,8 @@ paths:
                   SupportRepId:
                     type: integer
                     format: int64
-                    minimum: 1  
+                    minimum: 1
+                    example: 1  
         '400':
           "$ref": "#/components/responses/_400"                     
         '401':
@@ -2076,10 +2160,12 @@ paths:
                     properties:
                       prev:
                         type: string
-                        description: Represents the URL for the previous page of this request  
+                        description: Represents the URL for the previous page of this request
+                        example: https://.../v1/albums/2sds6  
                       next:
                         type: string
-                        description: Represents the URL for the next page of this request 
+                        description: Represents the URL for the next page of this request
+                        example: https://.../v1/albums/2sDs6  
                   data:                        
                     type: array
                     items:
@@ -2095,6 +2181,7 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
+                          example: 1
                         Name:
                           type: string
                           maxLength: 200
@@ -2143,6 +2230,7 @@ paths:
                       type: integer
                       format: int64
                       minimum: 1
+                      example: 1
                     FirstName:
                       type: string
                       maxLength: 20
