@@ -134,6 +134,8 @@ paths:
                         format: int64
                         minimum: 1
                         example: 1
+        '400':
+          "$ref": "#/components/responses/_400"                         
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -462,6 +464,8 @@ paths:
                           type: string
                           maxLength: 30
                           example: "Apple"
+        '400':
+          "$ref": "#/components/responses/_400"
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -1006,6 +1010,8 @@ paths:
                           format: double
                           minimum: 0.0
                           example: 3.26
+        '400':
+          "$ref": "#/components/responses/_400"                          
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
@@ -1263,6 +1269,8 @@ paths:
                           format: double
                           minimum: 0.0
                           example: 3.26
+        '400':
+          "$ref": "#/components/responses/_400"                          
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -1715,6 +1723,8 @@ paths:
                           minimum: 1
                           format: int64
                           example: 1
+        '400':
+          "$ref": "#/components/responses/_400"                          
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -2199,7 +2209,9 @@ paths:
                           type: number
                           format: double
                           minimum: 0.0
-                          example: 2.36                      
+                          example: 2.36
+        '400':
+          "$ref": "#/components/responses/_400"                                                
         '401':
           "$ref": "#/components/responses/_401"
         '503':
@@ -2243,7 +2255,9 @@ paths:
                       type: number
                       format: double
                       minimum: 0.0
-                      example: 27.59                      
+                      example: 27.59
+        '400':
+          "$ref": "#/components/responses/_400"                                            
         '401':
           "$ref": "#/components/responses/_401"  
         '503':
@@ -2281,7 +2295,9 @@ paths:
                       type: number
                       minimum: 0.0
                       format: double
-                      example: 2700.59                      
+                      example: 2700.59
+        '400':
+          "$ref": "#/components/responses/_400"                                                                  
         '401':
           "$ref": "#/components/responses/_401" 
         '503':
