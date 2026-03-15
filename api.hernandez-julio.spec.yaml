@@ -83,7 +83,7 @@ paths:
         '503':
           "$ref": "#/components/responses/_503"                    
   /webapi/v1/albums:
-    description: Returns a paginated list of albums.
+    description: The get method returns a paginated list of albums, the post method adds a new album to the database.
     get:
       tags:
         - List of albums 
@@ -204,44 +204,7 @@ paths:
         '503':
           "$ref": "#/components/responses/_503"                               
   /webapi/v1/albums/{AlbumId}:
-    description: Returns a album by Id.
-    get:
-      tags:
-        - Album
-      description: Returns one album by Id
-      operationId: getAlbumById             
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - AlbumId
-                - Title
-                - ArtistId
-                properties:
-                  AlbumId:
-                    type: integer
-                    format: int64
-                    minimum: 1
-                    example: 1
-                  Title:
-                    type: string
-                    maxLength: 160
-                    example: "Apple"
-                  ArtistId:
-                    type: integer
-                    format: int64
-                    minimum: 1
-                    example: 1
-        '401':
-          "$ref": "#/components/responses/_401"                    
-        '404':
-          "$ref": "#/components/responses/_404"                     
-        '503':
-          "$ref": "#/components/responses/_503"
+    description: This endpoint updates and deletes albums by Id.
     put:
       tags:
         - Update Album
@@ -445,7 +408,9 @@ paths:
                         - EmployeeId
                         - LastName  
                         - FirstName 
-                        - Title 
+                        - Title
+                        - ReportsTo
+                        - Email 
                       properties:
                         EmployeeId:
                           type: integer
@@ -464,6 +429,15 @@ paths:
                           type: string
                           maxLength: 30
                           example: "Apple"
+                        ReportsTo:
+                          type: integer
+                          format: int64
+                          minimum: 1
+                          example: 1
+                        Email:
+                          type: string
+                          maxLength: 60
+                          example: "abc123@server1.com"                                                    
         '400':
           "$ref": "#/components/responses/_400"
         '401':
@@ -1236,8 +1210,7 @@ paths:
                         - TrackId     
                         - Name        
                         - AlbumId     
-                        - MediaTypeId 
-                        - GenreId           
+                        - Composer        
                         - UnitPrice 
                       properties:
                         TrackId:
@@ -1254,16 +1227,10 @@ paths:
                           format: int64
                           minimum: 1
                           example: 1
-                        MediaTypeId:
-                          type: integer
-                          format: int64
-                          minimum: 1
-                          example: 1
-                        GenreId:
-                          type: integer
-                          minimum: 1
-                          format: int64
-                          example: 1
+                        Composer:
+                          type: string
+                          maxLength: 220
+                          example: "Apple"
                         UnitPrice:
                           type: number
                           format: double
@@ -1421,7 +1388,10 @@ paths:
                   - Name        
                   - AlbumId     
                   - MediaTypeId 
-                  - GenreId           
+                  - GenreId
+                  - Composer
+                  - Milliseconds
+                  - Bytes           
                   - UnitPrice 
                 properties:
                   TrackId:
@@ -1448,6 +1418,22 @@ paths:
                     minimum: 1
                     format: int64
                     example: 1
+                  Composer:
+                    type: string
+                    maxLength: 200
+                    example: "Apple"
+                  Milliseconds:
+                    type: integer
+                    minimum: 1
+                    maximum: 3600000
+                    format: int64
+                    example: 1
+                  Bytes:
+                    type: integer
+                    minimum: 1
+                    maximum: 300000000
+                    format: int64
+                    example: 1  
                   UnitPrice:
                     type: number
                     format: double
@@ -1471,6 +1457,11 @@ paths:
             schema:
               type: object
               properties:
+                TrackId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 1
                 Name:
                   type: string
                   maxLength: 200
@@ -1490,6 +1481,22 @@ paths:
                   minimum: 1
                   format: int64
                   example: 1
+                Composer:
+                  type: string
+                  maxLength: 200
+                  example: "Apple"
+                Milliseconds:
+                  type: integer
+                  minimum: 1
+                  maximum: 3600000
+                  format: int64
+                  example: 1
+                Bytes:
+                  type: integer
+                  minimum: 1
+                  maximum: 300000000
+                  format: int64
+                  example: 1  
                 UnitPrice:
                   type: number
                   format: double
@@ -1501,13 +1508,6 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - TrackId     
-                  - Name        
-                  - AlbumId     
-                  - MediaTypeId 
-                  - GenreId           
-                  - UnitPrice 
                 properties:
                   TrackId:
                     type: integer
@@ -1533,6 +1533,22 @@ paths:
                     minimum: 1
                     format: int64
                     example: 1
+                  Composer:
+                    type: string
+                    maxLength: 200
+                    example: "Apple"
+                  Milliseconds:
+                    type: integer
+                    minimum: 1
+                    maximum: 3600000
+                    format: int64
+                    example: 1
+                  Bytes:
+                    type: integer
+                    minimum: 1
+                    maximum: 300000000
+                    format: int64
+                    example: 1  
                   UnitPrice:
                     type: number
                     format: double
@@ -1610,13 +1626,6 @@ paths:
                     type: array
                     items:
                       type: object
-                      required:
-                        - TrackId     
-                        - Name        
-                        - AlbumId     
-                        - MediaTypeId 
-                        - GenreId           
-                        - UnitPrice 
                       properties:
                         TrackId:
                           type: integer
@@ -1636,11 +1645,28 @@ paths:
                           type: integer
                           minimum: 1
                           format: int64
+                          example: 1
                         GenreId:
                           type: integer
-                          format: int64
                           minimum: 1
+                          format: int64
                           example: 1
+                        Composer:
+                          type: string
+                          maxLength: 200
+                          example: "Apple"
+                        Milliseconds:
+                          type: integer
+                          minimum: 1
+                          maximum: 3600000
+                          format: int64
+                          example: 1
+                        Bytes:
+                          type: integer
+                          minimum: 1
+                          maximum: 300000000
+                          format: int64
+                          example: 1  
                         UnitPrice:
                           type: number
                           format: double
@@ -1699,11 +1725,6 @@ paths:
                     type: array
                     items:
                       type: object
-                      required:
-                        - CustomerId  
-                        - FirstName   
-                        - LastName                  
-                        - SupportRepId
                       properties:
                         CustomerId:
                           type: integer
@@ -1746,51 +1767,51 @@ paths:
                 - LastName           
                 - Email       
               properties:
-              FirstName:
+                FirstName:
                   type: string
                   maxLength: 40
                   example: "Apple"
-              LastName:
+                LastName:
                   type: string
                   maxLength: 40
                   example: "apple"
-              Company:
+                Company:
                   type: string
                   maxLength: 80
                   example: apple
-              Address:
+                Address:
                   type: string
                   maxLength: 70
                   example: apple
-              City:
+                City:
                   type: string
                   maxLength: 40
                   example: apple
-              State:
+                State:
                   type: string
                   maxLength: 40
                   example: apple
-              Country:
+                Country:
                   type: string
                   maxLength: 40
                   example: apple
-              PostalCode: 
+                PostalCode: 
                   type: string
                   maxLength: 10
                   example: 03000
-              Phone: 
+                Phone: 
                   type: string
                   maxLength: 24
                   example: 02-55555555
-              Fax: 
+                Fax: 
                   type: string
                   maxLength: 24
                   example: 123456789
-              Email: 
+                Email: 
                   type: string
                   maxLength: 60
                   example: apple68@yahoo.com                               
-              SupportRepId:
+                SupportRepId:
                   type: integer
                   format: int64
                   minimum: 1
