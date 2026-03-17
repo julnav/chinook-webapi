@@ -15,13 +15,28 @@ servers:
   - url: https://api.hernandez-julio.com
     description: Production set
 security:
-  - bearerAuth: []     
+  - bearerAuth: []   
+tags :
+  - name: Me
+    description: Current user info
+  - name: Albums
+    description: Manages albums
+  - name: Employees
+    description: Manages employees
+  - name: Invoices
+    description: Manages invoices
+  - name: Tracks
+    description: Manages tracks
+  - name: Customers
+    description: Manages customers
+  - name: Sales
+    description: Manages sales                      
 paths:
   /webapi/v1/me:
     description: Returns info about the current user.
     get:
       tags:
-        - Current user info  
+        - Me 
       description: Returns the current user description
       operationId: getCurrentUser                
       responses:
@@ -51,9 +66,12 @@ paths:
                     maxLength: 60
                     example: something@fake.com
                   status:
-                    type: enum
-                    enum: [Active, Suspended, Deleted]
-                    example: Active
+                    type: string
+                    enum: 
+                      - Active
+                      - Suspended 
+                      - Deleted
+                    default: Active
                   receive_offer:
                     type: integer
                     minimum: 0
@@ -86,7 +104,7 @@ paths:
     description: The get method returns a paginated list of albums, the post method adds a new album to the database.
     get:
       tags:
-        - List of albums 
+        - Albums 
       description: Returns the list of albums
       operationId: getAllAlbums               
       responses:
@@ -100,8 +118,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -142,7 +160,7 @@ paths:
           "$ref": "#/components/responses/_503"         
     post:
       tags:
-        - Create new album 
+        - Albums 
       description: Create a new album
       operationId: addNewAlbum
       requestBody:
@@ -207,7 +225,7 @@ paths:
     description: This endpoint updates and deletes albums by Id.
     put:
       tags:
-        - Update Album
+        - Albums
       description: Updates an album
       operationId: updateAlbum
       requestBody:
@@ -263,7 +281,7 @@ paths:
           "$ref": "#/components/responses/_503"                     
     delete:
       tags:
-        - Delete an album 
+        - Albums 
       description: Delete an album
       operationId: deleteAlbum
       responses:
@@ -274,7 +292,7 @@ paths:
               schema:
                 type: object
                 required:
-                  DeletedAlbumId
+                  - DeletedAlbumId
                 properties:
                   DeletedAlbumId:
                     type: integer
@@ -302,7 +320,7 @@ paths:
     description: Returns a paginated list of albums from a search result.
     get:
       tags:
-        - List of albums 
+        - Albums 
       description: Returns the list of albums found
       operationId: searchAlbum            
       responses:
@@ -316,8 +334,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -375,7 +393,7 @@ paths:
     description: Returns a paginated list of employees.
     get:
       tags:
-        - List of Employees 
+        - Employees 
       description: Returns the list of employees
       operationId: getAllEmpoyees               
       responses:
@@ -389,8 +407,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -446,7 +464,7 @@ paths:
           "$ref": "#/components/responses/_503"         
     post:
       tags:
-        - Create new employee 
+        - Employees 
       description: Create a new employee
       operationId: addNewEmployee
       requestBody:
@@ -625,7 +643,7 @@ paths:
     description: Returns a detailed employee data.
     get:
       tags:
-        - EmployeesById 
+        - Employees
       description: Returns an employee
       operationId: getEmployeeById               
       responses:
@@ -723,7 +741,7 @@ paths:
           "$ref": "#/components/responses/_503"
     put:
       tags:
-        - UpdateEmployee
+        - Employees
       description: Updates an employee
       operationId: updateEmployee
       requestBody:
@@ -893,7 +911,7 @@ paths:
           "$ref": "#/components/responses/_503"                          
     delete:
       tags:
-        - DeleteEmployeesById 
+        - Employees
       description: Delete an employee
       operationId: deleteEmployee 
       responses:
@@ -904,7 +922,7 @@ paths:
               schema:
                 type: object
                 required:
-                  DeletedEmployeeId
+                  - DeletedEmployeeId
                 properties:
                   DeletedEmployeeId:
                     type: integer
@@ -929,7 +947,7 @@ paths:
     description: Returns a paginated list of invoices.
     get:
       tags:
-        - List of invoices
+        - Invoices
       description: Returns the list of invoices
       operationId: getAllInvoices              
       responses:
@@ -943,8 +961,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -994,7 +1012,7 @@ paths:
     description: Returns a detailed invoice by its id.
     get:
       tags:
-        - Invoice by ID
+        - Invoices
       description: Returns an invoice
       operationId: getInvoiceById             
       responses:
@@ -1047,9 +1065,9 @@ paths:
                     maxLength: 40
                     example: "Kigaly"
                   BillingPostalCode:
-                  type: string
-                  maxLength: 10
-                  example: "Kigaly"                    
+                    type: string
+                    maxLength: 10
+                    example: "Kigaly"                    
                   Total:
                     type: number
                     format: double
@@ -1063,7 +1081,7 @@ paths:
           "$ref": "#/components/responses/_503"
     put:
       tags:
-        - Update invoice
+        - Invoices
       description: Update an invoices
       operationId: updateInvoice
       requestBody:
@@ -1101,9 +1119,9 @@ paths:
                   maxLength: 40
                   example: "Kigaly"
                 BillingPostalCode:
-                type: string
-                maxLength: 10
-                example: "Kigaly"                    
+                  type: string
+                  maxLength: 10
+                  example: "Kigaly"                    
                 Total:
                   type: number
                   format: double
@@ -1121,12 +1139,10 @@ paths:
                     type: integer
                     format: int64
                     minimum: 1
-                    example: 
                   CustomerId:
                     type: integer
                     format: int64
                     minimum: 1
-                    example: 1
                   InvoiceDate:
                     type: string
                     format: date-time
@@ -1149,9 +1165,9 @@ paths:
                     maxLength: 40
                     example: "Kigaly"
                   BillingPostalCode:
-                  type: string
-                  maxLength: 10
-                  example: "Kigaly"                    
+                    type: string
+                    maxLength: 10
+                    example: "Kigaly"                    
                   Total:
                     type: number
                     format: double
@@ -1177,7 +1193,7 @@ paths:
     description: Returns a paginated list of tracks (songs).
     get:
       tags:
-        - List of tracks 
+        - Tracks 
       description: Returns the list of tracks
       operationId: getAllTracks               
       responses:
@@ -1191,8 +1207,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -1217,7 +1233,6 @@ paths:
                           type: integer
                           format: int64
                           minimum: 1
-                          example: Active
                         Name:
                           type: string
                           maxLength: 200
@@ -1244,7 +1259,7 @@ paths:
           "$ref": "#/components/responses/_503"         
     post:
       tags:
-        - Create new track 
+        - Tracks
       description: Create a new track
       operationId: addNewTrack
       requestBody:
@@ -1373,7 +1388,7 @@ paths:
     description: Returns a track (songs) by its id.
     get:
       tags:
-        - A Track 
+        - Tracks 
       description: Returns a track
       operationId: getTrackById               
       responses:
@@ -1446,7 +1461,7 @@ paths:
           "$ref": "#/components/responses/_503"
     put:
       tags:
-        - Update Track 
+        - Tracks
       description: Updates a track
       operationId: updateTrack
       requestBody:
@@ -1563,7 +1578,7 @@ paths:
           "$ref": "#/components/responses/_503"                      
     delete:
       tags:
-        - DeleteTrackById 
+        - Tracks 
       description: Delete a track
       operationId: deleteTrack
       responses:
@@ -1574,7 +1589,7 @@ paths:
               schema:
                 type: object
                 required:
-                  DeletedTrackId
+                  - DeletedTrackId
                 properties:
                   DeletedTrackId:
                     type: integer
@@ -1597,7 +1612,7 @@ paths:
     description: Returns a paginated list of tracks from a search result.
     get:
       tags:
-        - List of tracks
+        - Tracks
       description: Returns the list of tracks found
       operationId: searchTrack   
       responses:
@@ -1611,8 +1626,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -1696,7 +1711,7 @@ paths:
     description: Returns a paginated list of customers.
     get:
       tags:
-        - List of albums 
+        - Customers 
       description: Returns the list of customers
       operationId: getAllCustomers               
       responses:
@@ -1710,8 +1725,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -1752,7 +1767,7 @@ paths:
           "$ref": "#/components/responses/_503"         
     post:
       tags:
-        - Create new customer 
+        - Customers 
       description: Create a new customer 
       operationId: addNewCustomer 
       requestBody:
@@ -1798,7 +1813,7 @@ paths:
                 PostalCode: 
                   type: string
                   maxLength: 10
-                  example: 03000
+                  example: "03000"
                 Phone: 
                   type: string
                   maxLength: 24
@@ -1806,7 +1821,7 @@ paths:
                 Fax: 
                   type: string
                   maxLength: 24
-                  example: 123456789
+                  example: "123456789"
                 Email: 
                   type: string
                   maxLength: 60
@@ -1814,8 +1829,7 @@ paths:
                 SupportRepId:
                   type: integer
                   format: int64
-                  minimum: 1
-                  example: 1                 
+                  minimum: 1                
       responses:
         '201':
           description: Created
@@ -1883,7 +1897,7 @@ paths:
                   Fax: 
                       type: string
                       maxLength: 24
-                      example: 12345678
+                      example: "12345678"
                   Email: 
                       type: string
                       maxLength: 60
@@ -1892,7 +1906,6 @@ paths:
                       type: integer
                       format: int64
                       minimum: 1
-                      example: 1 
         '400':
           "$ref": "#/components/responses/_400"           
         '401':
@@ -1905,7 +1918,7 @@ paths:
     description: Returns a customer detail info.
     get:
       tags:
-        - A customer 
+        - Customers 
       description: Returns a customer
       operationId: getCustomerById               
       responses:
@@ -1991,7 +2004,7 @@ paths:
           "$ref": "#/components/responses/_503"
     put:
       tags:
-        - Update a customer 
+        - Customers 
       description: Updates a customer
       operationId: updateCustomer
       requestBody:
@@ -2138,7 +2151,7 @@ paths:
           "$ref": "#/components/responses/_503"  
     delete:
       tags:
-        - DeleteCustomerById 
+        - Customers 
       description: Delete a Customer
       operationId: deleteCustomer
       responses:
@@ -2149,7 +2162,7 @@ paths:
               schema:
                 type: object
                 required:
-                  DeletedCustomerId
+                  - DeletedCustomerId
                 properties:
                   DeletedCustomerId:
                     type: integer
@@ -2172,7 +2185,7 @@ paths:
     description: Returns a paginated list of the total sales.
     get:
       tags:
-        - List of sales 
+        - Sales 
       description: Returns the list of sales
       operationId: getAllSales               
       responses:
@@ -2186,8 +2199,8 @@ paths:
                   lnks:
                     type: object
                     required:
-                      prev
-                      next
+                      - prev
+                      - next
                     properties:
                       prev:
                         type: string
@@ -2241,7 +2254,7 @@ paths:
     description: Returns a paginated list of sales by representative.
     get:
       tags:
-        - List of sales by representative
+        - Sales
       description: Returns the list of sales  by representative
       operationId: getAllSalesByRepresentative               
       responses:
@@ -2287,7 +2300,7 @@ paths:
     description: Returns a paginated list of sales grouped by quarter.
     get:
       tags:
-        - List of sales group by quarter.
+        - Sales
       description: Returns the list of sales grouped by quarter.
       operationId: getAllSalesGroupedByQuarter
       responses:
@@ -2326,7 +2339,7 @@ paths:
 components:
   responses: 
     _400:              
-      description: Bad request. 
+      description: Bad request
       content:
         application/json:
           schema:
@@ -2364,9 +2377,10 @@ components:
                 example: "Missing or invalid token."
       headers:      
         WWW-Authenticate:
-          description: Required authentication
+          description: Required authentication message
           schema:
-          example: "WWW-Authenticate: Bearer realm='Access to admin site', error='Required authentication'"
+            type: string
+            example: "WWW-Authenticate: Bearer realm='Access to admin site', error='Required authentication'"
     _404:              
       description: Not found 
       content:
@@ -2398,15 +2412,15 @@ components:
             properties:
               error:
                 type: string
-                maxLength: 32
+                maxLength: 82
                 example: Email error
               message:
                 type: string
-                maxLength: 42
+                maxLength: 82
                 example: This email is already been used in this server
               conflicting_field:
                 type: string
-                maxLength: 32
+                maxLength: 82
                 example: "email: {moraz12@gmail.com}"
     _503:
       description: Server maintenance. 
@@ -2415,9 +2429,9 @@ components:
           schema:
             type: object
             required:
-              error
-              message
-              timestamp
+              - error
+              - message
+              - timestamp
             properties:
               error:
                 type: string
