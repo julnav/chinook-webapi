@@ -1473,11 +1473,6 @@ paths:
             schema:
               type: object
               properties:
-                TrackId:
-                  type: integer
-                  format: int64
-                  minimum: 1
-                  example: 1
                 Name:
                   type: string
                   maxLength: 200
