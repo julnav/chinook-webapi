@@ -2419,6 +2419,24 @@ components:
                 type: string
                 maxLength: 82
                 example: "email: {moraz12@gmail.com}"
+    _500:
+      description: Generic 
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+              - message
+            properties:
+              error:
+                type: string
+                maxLength: 60
+                example: "Unexpected error"
+              message:
+                type: string
+                maxLength: 90
+                example: "Try again later"               
     _503:
       description: Server maintenance. 
       content:
