@@ -2438,25 +2438,22 @@ components:
                 maxLength: 90
                 example: "Try again later"               
     _503:
-      description: Server maintenance. 
+      description: Service Unavailable
       content:
         application/json:
           schema:
             type: object
-            required:
-              - error
-              - message
-              - timestamp
             properties:
-              error:
-                type: string
-                maxLength: 60
-                example: "Service Unavailable."
               message:
                 type: string
                 maxLength: 90
-                example: "We're currently upgrading our systems. Please check back at {Time}."
-              timestamp:
+                example: "We're currently upgrading our systems."
+              starts:
+                type: string
+                format: date-time
+                example: "2019-10-12T07:20:50.52Z"
+                description: ISO 8601 Combined Date and Time
+              ends:
                 type: string
                 format: date-time
                 example: "2019-10-12T07:20:50.52Z"
