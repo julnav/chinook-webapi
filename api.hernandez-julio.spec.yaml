@@ -97,7 +97,9 @@ paths:
                     example: "2019-10-12T07:20:50.52Z"
                     description: ISO 8601 Combined Date and Time
         '401':
-          "$ref": "#/components/responses/_401" 
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"                    
   /webapi/v1/albums:
@@ -155,7 +157,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"                         
         '401':
-          "$ref": "#/components/responses/_401" 
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"         
     post:
@@ -219,6 +223,8 @@ paths:
           "$ref": "#/components/responses/_400"           
         '401':
           "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"                               
   /webapi/v1/albums/{AlbumId}:
@@ -276,7 +282,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"                     
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                               
         '503':
           "$ref": "#/components/responses/_503"                     
     delete:
@@ -303,7 +311,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '404':
-          "$ref": "#/components/responses/_404"             
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                       
         '503':
           "$ref": "#/components/responses/_503"                                     
     parameters:      
@@ -371,7 +381,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
-          "$ref": "#/components/responses/_401"             
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"                       
         '503':
           "$ref": "#/components/responses/_503"                           
     parameters:       
@@ -459,7 +471,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"
         '401':
-          "$ref": "#/components/responses/_401" 
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"         
     post:
@@ -636,7 +650,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '409':
-          "$ref": "#/components/responses/_409" 
+          "$ref": "#/components/responses/_409"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"                                     
   /webapi/v1/employees/{EmployeeId}:
@@ -736,7 +752,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"  
         '404':
-          "$ref": "#/components/responses/_404"           
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                     
         '503':
           "$ref": "#/components/responses/_503"
     put:
@@ -906,7 +924,9 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"
         '409':
-          "$ref": "#/components/responses/_409"                                
+          "$ref": "#/components/responses/_409"
+        '500':
+          "$ref": "#/components/responses/_500"                                          
         '503':
           "$ref": "#/components/responses/_503"                          
     delete:
@@ -932,7 +952,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"                     
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                               
         '503':
           "$ref": "#/components/responses/_503"       
     parameters:      
@@ -1005,7 +1027,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"                          
         '401':
-          "$ref": "#/components/responses/_401" 
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"                         
   /webapi/v1/invoices/{InvoiceId}:
@@ -1076,7 +1100,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '404':
-          "$ref": "#/components/responses/_404"          
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                    
         '503':
           "$ref": "#/components/responses/_503"
     put:
@@ -1178,7 +1204,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"                     
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"
     parameters:      
@@ -1254,7 +1282,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"                          
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"            
         '503':
           "$ref": "#/components/responses/_503"         
     post:
@@ -1386,6 +1416,8 @@ paths:
           "$ref": "#/components/responses/_400"           
         '401':
           "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"          
   /webapi/v1/tracks/{TrackId}:
@@ -1461,6 +1493,8 @@ paths:
           "$ref": "#/components/responses/_401"
         '404':
           "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"
     put:
@@ -1576,7 +1610,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"                    
         '404':
-          "$ref": "#/components/responses/_404"                     
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"                      
     delete:
@@ -1600,7 +1636,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '404':
-          "$ref": "#/components/responses/_404"            
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                      
         '503':
           "$ref": "#/components/responses/_503"                                     
     parameters:      
@@ -1692,7 +1730,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400" 
         '401':
-          "$ref": "#/components/responses/_401"           
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"                     
         '503':
           "$ref": "#/components/responses/_503"                           
     parameters:       
@@ -1765,7 +1805,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"                          
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"            
         '503':
           "$ref": "#/components/responses/_503"         
     post:
@@ -1914,7 +1956,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '409':
-          "$ref": "#/components/responses/_409" 
+          "$ref": "#/components/responses/_409"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"                                    
   /webapi/v1/customers/{CustomerId}:
@@ -2002,7 +2046,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '404':
-          "$ref": "#/components/responses/_404"            
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                      
         '503':
           "$ref": "#/components/responses/_503"
     put:
@@ -2149,7 +2195,9 @@ paths:
         '404':
           "$ref": "#/components/responses/_404"
         '409':
-          "$ref": "#/components/responses/_409"                                
+          "$ref": "#/components/responses/_409"
+        '500':
+          "$ref": "#/components/responses/_500"                                          
         '503':
           "$ref": "#/components/responses/_503"  
     delete:
@@ -2173,7 +2221,9 @@ paths:
         '401':
           "$ref": "#/components/responses/_401"
         '404':
-          "$ref": "#/components/responses/_404"  
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"            
         '503':
           "$ref": "#/components/responses/_503"                                   
     parameters:      
@@ -2251,6 +2301,8 @@ paths:
           "$ref": "#/components/responses/_400"                                                
         '401':
           "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"                                         
   /webapi/v1/sales/byRep:
@@ -2296,7 +2348,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"                                            
         '401':
-          "$ref": "#/components/responses/_401"  
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"            
         '503':
           "$ref": "#/components/responses/_503"        
   /webapi/v1/sales/byquarter:
@@ -2336,7 +2390,9 @@ paths:
         '400':
           "$ref": "#/components/responses/_400"                                                                  
         '401':
-          "$ref": "#/components/responses/_401" 
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"           
         '503':
           "$ref": "#/components/responses/_503"                         
 components:
