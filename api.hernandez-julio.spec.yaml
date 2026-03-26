@@ -1281,16 +1281,19 @@ paths:
                   example: "Apple"
                 AlbumId:
                   type: integer
+                  description: "ID of the album. Must already exist in the albums table."
                   format: int64
                   minimum: 1
                   example: 1
                 MediaTypeId:
                   type: integer
+                  description: "ID of the media type. Must already exist in the media_types table."
                   format: int64
                   minimum: 1
                   example: 1
                 GenreId:
                   type: integer
+                  description: "ID of the genre. Must already exist in the genres table."
                   format: int64
                   minimum: 1
                   example: 1
@@ -1479,16 +1482,19 @@ paths:
                   example: "Apple"
                 AlbumId:
                   type: integer
+                  description: "ID of the album. Must already exist in the albums table."
                   minimum: 1
                   format: int64
                   example: 1
                 MediaTypeId:
                   type: integer
+                  description: "ID of the media type. Must already exist in the media_types table."
                   minimum: 1
                   format: int64
                   example: 1
                 GenreId:
                   type: integer
+                  description: "ID of the genre. Must already exist in the genres table."
                   minimum: 1
                   format: int64
                   example: 1
