@@ -1682,6 +1682,12 @@ paths:
                     type: array
                     items:
                       type: object
+                      required:
+                        - TrackId     
+                        - Name        
+                        - AlbumId     
+                        - Composer        
+                        - UnitPrice 
                       properties:
                         TrackId:
                           type: integer
