@@ -1022,7 +1022,8 @@ paths:
                         Total:
                           type: number
                           format: double
-                          minimum: 0.0
+                          minimum: 0.1
+                          maximum: 1000.0
                           example: 3.26
         '400':
           "$ref": "#/components/responses/_400"                          
@@ -1031,7 +1032,134 @@ paths:
         '500':
           "$ref": "#/components/responses/_500"           
         '503':
-          "$ref": "#/components/responses/_503"                         
+          "$ref": "#/components/responses/_503"
+    post:
+      tags:
+        - Invoices
+      description: Create a new invoice
+      operationId: addNewInvoice
+      requestBody:
+        description: invoice to add to the system
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              required:          
+                - CustomerId       
+                - InvoiceDate      
+                - Total 
+              properties:
+                CustomerId:
+                  description: "ID of the customer, must already exist in the Customers table."
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 1
+                InvoiceDate:
+                  type: string
+                  format: date-time
+                  example: "2019-10-12T07:20:50.52Z"
+                  description: ISO 8601 Combined Date and Time
+                BillingAddress:
+                  type: string
+                  maxLength: 70
+                  example: "Kigaly"
+                BillingCity:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingState :
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingCountry:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingPostalCode:
+                  type: string
+                  maxLength: 10
+                  example: "Kigaly"                    
+                Total:
+                  type: number
+                  format: double
+                  minimum: 0.1
+                  maximum: 1000.0
+                  example: 3.26
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: The unique location for the new invoice.
+              schema:
+                type: string
+                example: "https://api.hernandez-julio.com/webapi/v1/tracks/{InvoiceId}"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - InvoiceId        
+                  - CustomerId       
+                  - InvoiceDate      
+                  - BillingAddress   
+                  - BillingCity      
+                  - BillingState     
+                  - BillingCountry   
+                  - BillingPostalCode
+                  - Total 
+                properties:
+                InvoiceId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 1
+                CustomerId:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                  example: 1
+                InvoiceDate:
+                  type: string
+                  format: date-time
+                  example: "2019-10-12T07:20:50.52Z"
+                  description: ISO 8601 Combined Date and Time
+                BillingAddress:
+                  type: string
+                  maxLength: 70
+                  example: "Kigaly"
+                BillingCity:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingState :
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingCountry:
+                  type: string
+                  maxLength: 40
+                  example: "Kigaly"
+                BillingPostalCode:
+                  type: string
+                  maxLength: 10
+                  example: "Kigaly"                    
+                Total:
+                  type: number
+                  format: double
+                  minimum: 0.1
+                  maximum: 1000.0
+                  example: 3.26
+        '400':
+          "$ref": "#/components/responses/_400"           
+        '401':
+          "$ref": "#/components/responses/_401"
+        '500':
+          "$ref": "#/components/responses/_500"          
+        '503':
+          "$ref": "#/components/responses/_503"                                   
   /webapi/v1/invoices/{InvoiceId}:
     description: Returns a detailed invoice by its id.
     get:
@@ -1095,7 +1223,8 @@ paths:
                   Total:
                     type: number
                     format: double
-                    minimum: 0.0
+                    minimum: 0.1
+                    maximum: 1000.0
                     example: 3.26
         '401':
           "$ref": "#/components/responses/_401"
@@ -1120,6 +1249,7 @@ paths:
               properties:
                 CustomerId:
                   type: integer
+                  description: "ID of the customer, must already exist in the Customers table."
                   format: int64
                   minimum: 1
                   example: 1
@@ -1151,7 +1281,8 @@ paths:
                 Total:
                   type: number
                   format: double
-                  minimum: 0.0
+                  minimum: 0.1
+                  maximum: 1000.0
                   example: 3.26              
       responses:
         '200':
@@ -1197,7 +1328,8 @@ paths:
                   Total:
                     type: number
                     format: double
-                    minimum: 0.0
+                    minimum: 0.1
+                    maximum: 1000.0
                     example: 3.26 
         '400':
           "$ref": "#/components/responses/_400"                     
@@ -1209,6 +1341,32 @@ paths:
           "$ref": "#/components/responses/_500"          
         '503':
           "$ref": "#/components/responses/_503"
+    delete:
+      tags:
+        - Invoices 
+      description: Deletes an invoice
+      operationId: deleteInvoice
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - DeletedInvoiceId
+                properties:
+                  DeletedTrackId:
+                    type: integer
+                    minimum: 1
+        '401':
+          "$ref": "#/components/responses/_401"
+        '404':
+          "$ref": "#/components/responses/_404"
+        '500':
+          "$ref": "#/components/responses/_500"                      
+        '503':
+          "$ref": "#/components/responses/_503" 
     parameters:      
     - name: InvoiceId
       in: path
